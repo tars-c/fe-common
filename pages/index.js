@@ -1,5 +1,6 @@
 import React from 'react'
-import PatientTableContainer from '@common/containers/PatientTableContainer'
+
+import PatientTableContainer from '@patient/containers/PatientTableContainer'
 
 function Home() {
   return (
