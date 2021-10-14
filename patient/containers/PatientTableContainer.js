@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Table from '@common/components/Table'
 import filterPatient from '@patient/helpers/filterPatient'
 import { patientCategories } from '@patient/consts/patientTableConst'
+import Pagination from '@common/components/Pagination'
 
 const PatientTableContainer = () => {
   const {
@@ -24,10 +25,13 @@ const PatientTableContainer = () => {
   if (!patient) return <div>로딩중...</div>
 
   return (
-    <Table
-      categories={patientCategories}
-      dataList={filterPatient(patient.list)}
-    ></Table>
+    <>
+      <Table
+        categories={patientCategories}
+        dataList={filterPatient(patient.list)}
+      />
+      <Pagination />
+    </>
   )
 }
 export default PatientTableContainer
