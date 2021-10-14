@@ -1,15 +1,17 @@
 const path = {
-  patientList: (params) => {
+  patient: (query) => {
     let defaultPath = `/patient/list`
 
-    for (const [key, value] of Object.entries(params))
-      defaultPath += `?${key}=${value}`
+    if (query) {
+      for (const [key, value] of Object.entries(query))
+        defaultPath += `?${key}=${value}`
+    }
 
     return defaultPath
   },
-  raceList: () => `/race/list`,
-  genderList: () => `/gender/list`,
-  ethnicityList: () => `/ethnicity/list`,
+  race: () => `/race/list`,
+  gender: () => `/gender/list`,
+  ethnicity: () => `/ethnicity/list`,
   patientBrief: (id) => `/patient/brief/${id}`,
   patientCond: (id) => `/patient/detail/${id}/condition`,
   patientDrug: (id) => `/patient/detail/${id}/drug`,
