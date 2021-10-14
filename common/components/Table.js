@@ -1,29 +1,48 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const MyTable = styled.table`
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+`
+const TableHead = styled.th`
+  border: 1px solid black;
+`
+const TableRow = styled.tr`
+  border: 1px solid black;
+`
+const TableData = styled.td`
+  border: 1px solid black;
+`
 
 const Table = ({ categories, dataList }) => {
   return (
-    <table>
+    <MyTable>
       <thead>
-        <tr>
+        <TableRow>
           {categories.map((category, idx) => (
-            <th key={`thead__${idx}`}>{category.value}</th>
+            <TableHead key={`thead__${idx}`}>{category.value}</TableHead>
           ))}
-        </tr>
+        </TableRow>
       </thead>
       <tbody>
         {dataList &&
           dataList.map((data, dIdx) => {
             return (
-              <tr key={`trow__${dIdx}`}>
+              <TableRow key={`trow__${dIdx}`}>
                 {categories.map((category, cIdx) => (
-                  <td key={`tdata__${cIdx}`}>{data[category.id]}</td>
+                  <TableData key={`tdata__${cIdx}`}>
+                    {data[category.id]}
+                  </TableData>
                 ))}
-              </tr>
+              </TableRow>
             )
           })}
       </tbody>
-    </table>
+    </MyTable>
   )
 }
 

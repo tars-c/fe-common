@@ -97,7 +97,7 @@ const PatientTableContainer = () => {
   if (!patient) return <div>로딩중...</div>
 
   return (
-    <section>
+    <>
       <ListPagination opts={paginationOpts} onChange={handleListChange} />
       <Table
         categories={patientCategories}
@@ -107,7 +107,7 @@ const PatientTableContainer = () => {
         seqArray={makeSeqArray(range)}
         onClick={handlePaginationClick}
       />
-    </section>
+    </>
   )
 }
 export default PatientTableContainer
