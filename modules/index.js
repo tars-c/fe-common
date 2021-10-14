@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 })
 
 export function* rootSaga() {
-  yield all([fetchDataSaga])
+  yield all([fetchDataSaga()])
 }
 
 export default rootReducer
