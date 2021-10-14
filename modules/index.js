@@ -2,10 +2,12 @@ import { combineReducers } from 'redux'
 import { all } from 'redux-saga/effects'
 
 import api from '@api/modules/store'
+import patient from '@patient/modules/store'
 import { fetchDataSaga } from '@api/modules/saga/fetchData'
 
 const rootReducer = combineReducers({
   api,
+  patient,
 })
 
 export function* rootSaga() {
