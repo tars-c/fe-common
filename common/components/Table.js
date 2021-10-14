@@ -12,15 +12,16 @@ const Table = ({ categories, dataList }) => {
         </tr>
       </thead>
       <tbody>
-        {dataList.map((data, dIdx) => {
-          return (
-            <tr key={`trow__${dIdx}`}>
-              {categories.map((category, cIdx) => (
-                <td key={`tdata__${cIdx}`}>{data[category.id]}</td>
-              ))}
-            </tr>
-          )
-        })}
+        {dataList &&
+          dataList.map((data, dIdx) => {
+            return (
+              <tr key={`trow__${dIdx}`}>
+                {categories.map((category, cIdx) => (
+                  <td key={`tdata__${cIdx}`}>{data[category.id]}</td>
+                ))}
+              </tr>
+            )
+          })}
       </tbody>
     </table>
   )

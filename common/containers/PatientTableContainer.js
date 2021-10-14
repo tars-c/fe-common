@@ -7,9 +7,7 @@ import { patientCategories } from '@common/consts/patientTableConst'
 
 const PatientTableContainer = () => {
   const {
-    patient: {
-      patient: { list },
-    },
+    patient: { patient },
   } = useSelector((state) => state.api)
   const dispatch = useDispatch()
 
@@ -17,10 +15,12 @@ const PatientTableContainer = () => {
     dispatch({ type: 'FETCH_DATA', fetchType: 'patient' })
   }, [])
 
+  if (!patient) return <div>로딩중...</div>
+
   return (
     <Table
       categories={patientCategories}
-      dataList={filterPatient(list)}
+      dataList={filterPatient(patient.list)}
     ></Table>
   )
 }
