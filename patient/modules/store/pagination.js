@@ -2,10 +2,10 @@ export const SET_PAGE_NUM = '@pagination/SET_PAGE_NUM'
 export const SET_PAGE_LENGTH = '@pagination/SET_PAGE_LENGTH'
 
 // 페이지 번호 설정
-export const setPage = (page) => ({ type: SET_PAGE_LENGTH, page })
+export const setPage = (page) => ({ type: SET_PAGE_NUM, page })
 
 // 페이지 길이 설정
-export const setPageLength = (length) => ({ type: SET_PAGE_NUM, length })
+export const setPageLength = (length) => ({ type: SET_PAGE_LENGTH, length })
 
 const initialState = {
   page: 1,
