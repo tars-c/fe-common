@@ -7,11 +7,11 @@ const Pagination = () => {
 
   return (
     <div>
-      <div>previous</div>
+      <a>previous</a>
       {seqArray.map((item) => (
-        <div key={`pagination__${item}`}>{item}</div>
+        <a key={`pagination__${item}`}>{item}</a>
       ))}
-      <div>next</div>
+      <a>next</a>
     </div>
   )
 }
