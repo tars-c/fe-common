@@ -9,5 +9,7 @@ export const patientCategories = [
 export const paginationOpts = [
   { text: '10개씩 출력', value: 10 },
   { text: '20개씩 출력', value: 20 },
-  { text: '40개씩 출력', value: 40 },
+  { text: '50개씩 출력', value: 50 },
 ]
+
+export const PAGE_CNT = 10

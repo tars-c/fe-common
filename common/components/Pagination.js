@@ -4,11 +4,13 @@ import PropTypes from 'prop-types'
 const Pagination = ({ seqArray, onClick }) => {
   return (
     <div onClick={onClick}>
-      <a>previous</a>
+      <a name="prev">previous</a>
       {seqArray.map((item) => (
-        <a key={`pagination__${item}`}>{item}</a>
+        <a id={item} name="num" key={`pagination__${item}`}>
+          {item}
+        </a>
       ))}
-      <a>next</a>
+      <a name="next">next</a>
     </div>
   )
 }
