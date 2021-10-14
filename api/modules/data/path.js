@@ -3,8 +3,11 @@ const path = {
     let defaultPath = `/patient/list`
 
     if (query) {
+      let queryStr = []
       for (const [key, value] of Object.entries(query))
-        defaultPath += `?${key}=${value}`
+        queryStr.push(`${key}=${value}`)
+
+      defaultPath += '?' + queryStr.join('&')
     }
 
     return defaultPath
