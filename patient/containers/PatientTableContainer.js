@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Table from '@common/components/Table'
-import filterPatient from '@common/helpers/filterPatient'
-import { patientCategories } from '@common/consts/patientTableConst'
+import filterPatient from '@patient/helpers/filterPatient'
+import { patientCategories } from '@patient/consts/patientTableConst'
 
 const PatientTableContainer = () => {
   const {

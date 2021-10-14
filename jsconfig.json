@@ -4,7 +4,8 @@
     "paths": {
       "@api/*": ["api/*"],
       "@common/*": ["common/*"],
-      "@modules/*": ["modules/*"]
+      "@modules/*": ["modules/*"],
+      "@patient/*": ["patient/*"]
     }
   }
 }
