@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ListPagination from '@common/components/ListPagination'
 import Pagination from '@common/components/Pagination'
 import Table from '@common/components/Table'
+import makeSeqArray from '@common/helpers/makeSeqArray'
 import filterPatient from '@patient/helpers/filterPatient'
 import {
   patientCategories,
@@ -11,7 +12,6 @@ import {
   PAGE_CNT,
 } from '@patient/consts/patientTableConst'
 import { setPage, setPageLength } from '@patient/modules/store/pagination'
-import makeSeqArray from '@common/helpers/makeSeqArray'
 
 const PatientTableContainer = () => {
   const {
