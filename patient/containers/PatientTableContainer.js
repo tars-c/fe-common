@@ -39,9 +39,12 @@ const PatientTableContainer = () => {
       dispatch({
         type: 'FETCH_DATA',
         fetchType: 'patient',
-        params: { page, length: newLength },
+        params: { page: 1, length: newLength },
       })
       dispatch(setPageLength(newLength))
+
+      dispatch(setPage(1))
+      setRange({ start: 1, end: 10 })
     } catch (e) {
       console.error(e)
     }
