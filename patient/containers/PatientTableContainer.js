@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Table from '@common/components/Table'
 import filterPatient from '@patient/helpers/filterPatient'
-import { patientCategories } from '@patient/consts/patientTableConst'
+import {
+  patientCategories,
+  paginationOpts,
+} from '@patient/consts/patientTableConst'
+import ListPagination from '@common/components/ListPagination'
 import Pagination from '@common/components/Pagination'
 
 const PatientTableContainer = () => {
@@ -26,6 +30,7 @@ const PatientTableContainer = () => {
 
   return (
     <>
+      <ListPagination opts={paginationOpts} />
       <Table
         categories={patientCategories}
         dataList={filterPatient(patient.list)}

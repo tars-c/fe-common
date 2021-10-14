@@ -6,3 +6,8 @@ export const patientCategories = [
   { id: 'isDeath', value: '사망여부' },
   { id: 'race', value: '인종' },
 ]
+export const paginationOpts = [
+  { text: '10개씩 출력', value: 10 },
+  { text: '20개씩 출력', value: 20 },
+  { text: '40개씩 출력', value: 40 },
+]
