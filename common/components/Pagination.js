@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import makeSeqArray from '@common/helpers/makeSeqArray'
-
-const Pagination = () => {
-  const [seqArray, setSeqArray] = useState(makeSeqArray(1, 10))
-
+const Pagination = ({ seqArray, onClick }) => {
   return (
-    <div>
+    <div onClick={onClick}>
       <a>previous</a>
       {seqArray.map((item) => (
         <a key={`pagination__${item}`}>{item}</a>
@@ -15,4 +12,14 @@ const Pagination = () => {
     </div>
   )
 }
+
+Pagination.propTypes = {
+  range: PropTypes.array,
+  onClick: PropTypes.func,
+}
+Pagination.defaultProps = {
+  seqArray: [1],
+  onClick: () => {},
+}
+
 export default Pagination

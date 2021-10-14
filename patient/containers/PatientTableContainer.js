@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import ListPagination from '@common/components/ListPagination'
@@ -10,20 +10,27 @@ import {
   paginationOpts,
 } from '@patient/consts/patientTableConst'
 import { setPageLength } from '@patient/modules/store/pagination'
+import makeSeqArray from '@common/helpers/makeSeqArray'
 
 const PatientTableContainer = () => {
   const {
-    patient: { patient },
+    patient: { patient, totalLength },
   } = useSelector((state) => state.api)
   const { page, length } = useSelector((state) => state.patient.pagination)
 
   const dispatch = useDispatch()
+
+  const [range, setRange] = useState({ start: 1, end: 1 })
 
   useEffect(() => {
     dispatch({
       type: 'FETCH_DATA',
       fetchType: 'patient',
       params: { page, length },
+    })
+    setRange({
+      start: 1,
+      end: Math.ceil(totalLength / length) < 10 ? totalLength / length : 10,
     })
   }, [])
 
@@ -48,7 +55,7 @@ const PatientTableContainer = () => {
         categories={patientCategories}
         dataList={filterPatient(patient.list)}
       />
-      <Pagination />
+      <Pagination seqArray={makeSeqArray(range)} />
     </>
   )
 }

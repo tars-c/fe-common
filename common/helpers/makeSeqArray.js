@@ -1,4 +1,4 @@
-const makeSeqArray = (start, end) => {
+const makeSeqArray = ({ start, end }) => {
   let arr = []
   for (let i = start; i <= end; i++) arr.push(i)
 
