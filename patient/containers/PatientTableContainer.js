@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import ListPagination from '@common/components/ListPagination'
+import Pagination from '@common/components/Pagination'
 import Table from '@common/components/Table'
 import filterPatient from '@patient/helpers/filterPatient'
 import {
   patientCategories,
   paginationOpts,
 } from '@patient/consts/patientTableConst'
-import ListPagination from '@common/components/ListPagination'
-import Pagination from '@common/components/Pagination'
 
 const PatientTableContainer = () => {
   const {
