@@ -105,6 +105,7 @@ const PatientTableContainer = () => {
       />
       <Pagination
         seqArray={makeSeqArray(range)}
+        curr={page}
         onClick={handlePaginationClick}
       />
     </>

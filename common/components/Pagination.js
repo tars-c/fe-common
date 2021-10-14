@@ -10,7 +10,8 @@ const PaginationBtn = styled.a`
   margin: 15px 3px 0;
   padding: 10px;
   border: 1px solid #33658a;
-  color: #33658a;
+  background-color: ${({ selected }) => (selected ? '#33658a' : 'white')};
+  color: ${({ selected }) => (selected ? 'white' : '#33658a')};
   cursor: pointer;
   border-radius: 5px;
 
@@ -20,12 +21,17 @@ const PaginationBtn = styled.a`
   }
 `
 
-const Pagination = ({ seqArray, onClick }) => {
+const Pagination = ({ seqArray, curr, onClick }) => {
   return (
     <MyPagination onClick={onClick}>
       <PaginationBtn name="prev">previous</PaginationBtn>
       {seqArray.map((item) => (
-        <PaginationBtn id={item} name="num" key={`pagination__${item}`}>
+        <PaginationBtn
+          id={item}
+          name="num"
+          selected={parseInt(item) === parseInt(curr)}
+          key={`pagination__${item}`}
+        >
           {item}
         </PaginationBtn>
       ))}
@@ -36,10 +42,12 @@ const Pagination = ({ seqArray, onClick }) => {
 
 Pagination.propTypes = {
   range: PropTypes.array,
+  curr: PropTypes.number,
   onClick: PropTypes.func,
 }
 Pagination.defaultProps = {
   seqArray: [1],
+  curr: 1,
   onClick: () => {},
 }
 
