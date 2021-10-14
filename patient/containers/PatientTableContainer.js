@@ -9,6 +9,7 @@ import {
   patientCategories,
   paginationOpts,
 } from '@patient/consts/patientTableConst'
+import { setPageLength } from '@patient/modules/store/pagination'
 
 const PatientTableContainer = () => {
   const {
@@ -26,11 +27,23 @@ const PatientTableContainer = () => {
     })
   }, [])
 
+  // 리스트 페이지네이션 이벤트 핸들러
+  const handleListChange = (e) => {
+    const newLength = e.target.value
+
+    dispatch({
+      type: 'FETCH_DATA',
+      fetchType: 'patient',
+      params: { page, length: newLength },
+    })
+    dispatch(setPageLength(newLength))
+  }
+
   if (!patient) return <div>로딩중...</div>
 
   return (
     <>
-      <ListPagination opts={paginationOpts} />
+      <ListPagination opts={paginationOpts} onChange={handleListChange} />
       <Table
         categories={patientCategories}
         dataList={filterPatient(patient.list)}
