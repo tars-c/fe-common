@@ -9,10 +9,16 @@ const PatientTableContainer = () => {
   const {
     patient: { patient },
   } = useSelector((state) => state.api)
+  const { page, length } = useSelector((state) => state.patient.pagination)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_DATA', fetchType: 'patient' })
+    dispatch({
+      type: 'FETCH_DATA',
+      fetchType: 'patient',
+      params: { page, length },
+    })
   }, [])
 
   if (!patient) return <div>로딩중...</div>
