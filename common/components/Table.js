@@ -20,13 +20,13 @@ const WrapTableData = styled.td`
   ${defaultTableBorderStyle}
 `
 
-const Table = ({ categories, dataList }) => {
+const Table = ({ categories, dataList, onClick }) => {
   return (
     <WrapTable>
       <thead>
-        <WrapTableRow>
+        <WrapTableRow onClick={onClick}>
           {categories.map((category, idx) => (
-            <WrapTableHead key={`thead__${idx}`}>
+            <WrapTableHead key={`thead__${idx}`} id={category.tableCol || ''}>
               {category.value}
             </WrapTableHead>
           ))}
@@ -53,10 +53,12 @@ const Table = ({ categories, dataList }) => {
 Table.propTypes = {
   categories: PropTypes.array,
   dataList: PropTypes.array,
+  onClick: PropTypes.func,
 }
 Table.defaultProps = {
   categories: [],
   dataList: [],
+  onClick: () => {},
 }
 
 export default Table

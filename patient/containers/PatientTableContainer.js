@@ -14,13 +14,15 @@ import {
 import { setPage, setPageLength } from '@patient/modules/store/pagination'
 
 const PatientTableContainer = () => {
-  const {
-    patient: { patient },
-  } = useSelector((state) => state.api)
+  const { patient } = useSelector((state) => state.api)
   const { page, length } = useSelector((state) => state.patient.pagination)
 
   const dispatch = useDispatch()
 
+  const [orderDesc, setOrderDesc] = useState({
+    desc: false,
+    befOrderName: '',
+  })
   const [range, setRange] = useState({ start: 1, end: 10 })
 
   useEffect(() => {
@@ -97,14 +99,32 @@ const PatientTableContainer = () => {
     }
   }
 
-  if (!patient) return <div>로딩중...</div>
+  // 테이블 헤더 클릭 이벤트 핸들러 - 테이블 컬럼 정렬
+  const handleTableHeadClick = (e) => {
+    const { id } = e.target
+
+    if (!id) return
+
+    dispatch({
+      type: 'FETCH_DATA',
+      fetchType: 'patient',
+      params: { page, length, order_column: id, order_desc: orderDesc.desc },
+    })
+    setOrderDesc({
+      desc: id === orderDesc.befOrderName ? !orderDesc.desc : false,
+      befOrderName: id,
+    })
+  }
+
+  if (!patient || !patient.patient) return <div>로딩중...</div>
 
   return (
     <>
       <ListPagination opts={paginationOpts} onChange={handleListChange} />
       <Table
         categories={patientCategories}
-        dataList={filterPatient(patient.list)}
+        dataList={filterPatient(patient.patient.list)}
+        onClick={handleTableHeadClick}
       />
       <Pagination
         seqArray={makeSeqArray(range)}
