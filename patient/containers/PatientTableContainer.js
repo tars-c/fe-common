@@ -5,6 +5,7 @@ import ListPagination from '@common/components/ListPagination'
 import Pagination from '@common/components/Pagination'
 import Table from '@common/components/Table'
 import makeSeqArray from '@common/helpers/makeSeqArray'
+import PatinetFilterContainer from '@patient/containers/PatientFilterContainer'
 import filterPatient from '@patient/helpers/filterPatient'
 import {
   patientCategories,
@@ -15,7 +16,7 @@ import {
 import { setPage, setPageLength } from '@patient/modules/store/pagination'
 
 const PatientTableContainer = () => {
-  const { patient, race } = useSelector((state) => state.api)
+  const { patient, race, gender, ethnicity } = useSelector((state) => state.api)
   const { page, length } = useSelector((state) => state.patient.pagination)
 
   const dispatch = useDispatch()
@@ -25,6 +26,11 @@ const PatientTableContainer = () => {
     befOrderName: '',
   })
   const [range, setRange] = useState({ start: 1, end: 10 })
+  const [filterInfo, setFilterInfo] = useState({
+    list: null,
+    type: '',
+    value: null,
+  })
 
   useEffect(() => {
     initFetch()
@@ -124,6 +130,45 @@ const PatientTableContainer = () => {
     })
   }
 
+  // 테이블 필터 클릭 이벤트 핸들러
+  const handleFilterClick = (e) => {
+    const { id } = e.target.closest('SPAN')
+
+    if (!id) return
+
+    if (id === 'gender') {
+      setFilterInfo({
+        list: gender.genderList,
+        type: 'radio',
+        value: gender.genderList,
+      })
+    } else if (id === 'age') {
+      setFilterInfo({
+        list: ['minAge', 'maxAge'],
+        type: 'number',
+        value: [0, 0],
+      })
+    } else if (id === 'race') {
+      setFilterInfo({
+        list: race.raceList,
+        type: 'radio',
+        value: race.raceList,
+      })
+    } else if (id === 'ethnicity') {
+      setFilterInfo({
+        list: ethnicity.ethnicityList,
+        type: 'radio',
+        value: ethnicity.ethnicityList,
+      })
+    } else if (id === 'isDeath') {
+      setFilterInfo({
+        list: ['T', 'F'],
+        type: 'radio',
+        value: ['true', 'false'],
+      })
+    }
+  }
+
   if (!patient || !patient.patient) return <div>로딩중...</div>
 
   return (
@@ -133,12 +178,14 @@ const PatientTableContainer = () => {
         categories={patientCategories}
         dataList={filterPatient(patient.patient.list)}
         onClick={handleTableHeadClick}
+        onFilterClick={handleFilterClick}
       />
       <Pagination
         seqArray={makeSeqArray(range)}
         curr={page}
         onClick={handlePaginationClick}
       />
+      {filterInfo.list && <PatinetFilterContainer {...filterInfo} />}
     </>
   )
 }
