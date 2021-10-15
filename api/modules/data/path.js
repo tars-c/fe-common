@@ -4,8 +4,10 @@ const path = {
 
     if (query) {
       let queryStr = []
-      for (const [key, value] of Object.entries(query))
+      for (const [key, value] of Object.entries(query)) {
+        if (!value) continue
         queryStr.push(`${key}=${value}`)
+      }
 
       defaultPath += '?' + queryStr.join('&')
     }
