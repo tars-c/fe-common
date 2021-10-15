@@ -2,20 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { defaultTableBorderStyle } from '@common/styles/table'
+
 const WrapTable = styled.table`
   width: 100%;
-  border: 1px solid black;
+  ${defaultTableBorderStyle}
   border-collapse: collapse;
   text-align: center;
 `
 const WrapTableHead = styled.th`
-  border: 1px solid black;
+  ${defaultTableBorderStyle}
 `
 const WrapTableRow = styled.tr`
-  border: 1px solid black;
+  ${defaultTableBorderStyle}
 `
 const WrapTableData = styled.td`
-  border: 1px solid black;
+  ${defaultTableBorderStyle}
 `
 
 const Table = ({ categories, dataList }) => {
