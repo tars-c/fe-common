@@ -28,6 +28,9 @@ const Table = ({ categories, dataList, onClick }) => {
           {categories.map((category, idx) => (
             <WrapTableHead key={`thead__${idx}`} id={category.tableCol || ''}>
               {category.value}
+              {category.handleFilterClick && (
+                <TableFilter onClick={category.handleFilterClick} />
+              )}
             </WrapTableHead>
           ))}
         </WrapTableRow>
