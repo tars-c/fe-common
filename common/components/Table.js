@@ -2,47 +2,49 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const MyTable = styled.table`
+const WrapTable = styled.table`
   width: 100%;
   border: 1px solid black;
   border-collapse: collapse;
   text-align: center;
 `
-const TableHead = styled.th`
+const WrapTableHead = styled.th`
   border: 1px solid black;
 `
-const TableRow = styled.tr`
+const WrapTableRow = styled.tr`
   border: 1px solid black;
 `
-const TableData = styled.td`
+const WrapTableData = styled.td`
   border: 1px solid black;
 `
 
 const Table = ({ categories, dataList }) => {
   return (
-    <MyTable>
+    <WrapTable>
       <thead>
-        <TableRow>
+        <WrapTableRow>
           {categories.map((category, idx) => (
-            <TableHead key={`thead__${idx}`}>{category.value}</TableHead>
+            <WrapTableHead key={`thead__${idx}`}>
+              {category.value}
+            </WrapTableHead>
           ))}
-        </TableRow>
+        </WrapTableRow>
       </thead>
       <tbody>
         {dataList &&
           dataList.map((data, dIdx) => {
             return (
-              <TableRow key={`trow__${dIdx}`}>
+              <WrapTableRow key={`trow__${dIdx}`}>
                 {categories.map((category, cIdx) => (
-                  <TableData key={`tdata__${cIdx}`}>
+                  <WrapTableData key={`tdata__${cIdx}`}>
                     {data[category.id]}
-                  </TableData>
+                  </WrapTableData>
                 ))}
-              </TableRow>
+              </WrapTableRow>
             )
           })}
       </tbody>
-    </MyTable>
+    </WrapTable>
   )
 }
 

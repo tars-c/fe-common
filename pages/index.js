@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import PatientTableContainer from '@patient/containers/PatientTableContainer'
 
-const TableLayout = styled.section`
+const WrapTableLayout = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,9 +13,9 @@ const TableLayout = styled.section`
 
 function Home() {
   return (
-    <TableLayout>
+    <WrapTableLayout>
       <PatientTableContainer />
-    </TableLayout>
+    </WrapTableLayout>
   )
 }
 

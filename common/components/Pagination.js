@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const MyPagination = styled.div`
+const WrapPagination = styled.div`
   display: flex;
 `
-const PaginationBtn = styled.a`
+const WrapPaginationBtn = styled.a`
   display: block;
   margin: 15px 3px 0;
   padding: 10px;
@@ -23,20 +23,20 @@ const PaginationBtn = styled.a`
 
 const Pagination = ({ seqArray, curr, onClick }) => {
   return (
-    <MyPagination onClick={onClick}>
-      <PaginationBtn name="prev">previous</PaginationBtn>
+    <WrapPagination onClick={onClick}>
+      <WrapPaginationBtn name="prev">previous</WrapPaginationBtn>
       {seqArray.map((item) => (
-        <PaginationBtn
+        <WrapPaginationBtn
           id={item}
           name="num"
           selected={parseInt(item) === parseInt(curr)}
           key={`pagination__${item}`}
         >
           {item}
-        </PaginationBtn>
+        </WrapPaginationBtn>
       ))}
-      <PaginationBtn name="next">next</PaginationBtn>
-    </MyPagination>
+      <WrapPaginationBtn name="next">next</WrapPaginationBtn>
+    </WrapPagination>
   )
 }
 
