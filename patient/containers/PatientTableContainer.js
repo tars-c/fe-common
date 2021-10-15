@@ -60,8 +60,8 @@ const PatientTableContainer = () => {
     const limitPage = Math.ceil(Number(totalLength) / Number(length))
     let newPage
 
-    // 앞 단계 페이지
     if (name === 'prev') {
+      // 앞 단계 페이지
       newPage = page - PAGE_CNT
 
       if (newPage <= 0) return
@@ -70,9 +70,8 @@ const PatientTableContainer = () => {
         start: parseInt((newPage - 1) / PAGE_CNT) * PAGE_CNT + 1,
         end: parseInt((newPage - 1) / PAGE_CNT) * PAGE_CNT + PAGE_CNT,
       })
-    }
-    // 뒤 단계 페이지
-    else if (name === 'next') {
+    } else if (name === 'next') {
+      // 뒤 단계 페이지
       newPage = page + PAGE_CNT
 
       if (newPage > limitPage) return
@@ -81,9 +80,10 @@ const PatientTableContainer = () => {
         start: parseInt((newPage - 1) / PAGE_CNT) * PAGE_CNT + 1,
         end: parseInt((newPage - 1) / PAGE_CNT) * PAGE_CNT + PAGE_CNT,
       })
+    } else if (name === 'num') {
+      // 번호 페이지
+      newPage = parseInt(id)
     }
-    // 번호 페이지
-    else if (name === 'num') newPage = parseInt(id)
 
     try {
       dispatch({
