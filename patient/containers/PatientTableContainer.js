@@ -10,11 +10,12 @@ import {
   patientCategories,
   paginationOpts,
   PAGE_CNT,
+  initListFetch,
 } from '@patient/consts/patientTableConst'
 import { setPage, setPageLength } from '@patient/modules/store/pagination'
 
 const PatientTableContainer = () => {
-  const { patient } = useSelector((state) => state.api)
+  const { patient, race } = useSelector((state) => state.api)
   const { page, length } = useSelector((state) => state.patient.pagination)
 
   const dispatch = useDispatch()
@@ -26,12 +27,19 @@ const PatientTableContainer = () => {
   const [range, setRange] = useState({ start: 1, end: 10 })
 
   useEffect(() => {
+    initFetch()
+  }, [])
+
+  const initFetch = () => {
     dispatch({
       type: 'FETCH_DATA',
       fetchType: 'patient',
       params: { page, length },
     })
-  }, [])
+    initListFetch.forEach((list) => {
+      dispatch({ type: 'FETCH_DATA', fetchType: list })
+    })
+  }
 
   // 리스트 페이지네이션 이벤트 핸들러
   const handleListChange = (e) => {
