@@ -13,6 +13,7 @@ import {
   PAGE_CNT,
   initListFetch,
 } from '@patient/consts/patientTableConst'
+import { setFilter } from '@patient/modules/store/filter'
 import { setPage, setPageLength } from '@patient/modules/store/pagination'
 
 const PatientTableContainer = () => {
@@ -30,6 +31,8 @@ const PatientTableContainer = () => {
     list: null,
     type: '',
     value: null,
+    onReset: () => {},
+    onSubmit: () => {},
   })
 
   useEffect(() => {
@@ -136,37 +139,66 @@ const PatientTableContainer = () => {
 
     if (!id) return
 
+    // 필터 이벤트(초기화, 설정)
+    let newFilterInfo = {
+      onReset: (e) => {
+        e.preventDefault()
+        dispatch(setFilter(id, null))
+      },
+      onSubmit: (e) => {
+        e.preventDefault()
+        dispatch(setFilter(id, e.target.value))
+      },
+    }
+
+    // 필터 항목 설정
     if (id === 'gender') {
-      setFilterInfo({
+      newFilterInfo = {
+        ...newFilterInfo,
         list: gender.genderList,
         type: 'radio',
         value: gender.genderList,
-      })
+      }
     } else if (id === 'age') {
-      setFilterInfo({
+      newFilterInfo = {
+        ...newFilterInfo,
         list: ['minAge', 'maxAge'],
         type: 'number',
         value: [0, 0],
-      })
+        onReset: (e) => {
+          e.preventDefault()
+          dispatch(setFilter(age_min, null))
+          dispatch(setFilter(age_max, null))
+        },
+        onSubmit: (e) => {
+          e.preventDefault()
+          dispatch(setFilter(age_min, null))
+          dispatch(setFilter(age_max, null))
+        },
+      }
     } else if (id === 'race') {
-      setFilterInfo({
+      newFilterInfo = {
+        ...newFilterInfo,
         list: race.raceList,
         type: 'radio',
         value: race.raceList,
-      })
+      }
     } else if (id === 'ethnicity') {
-      setFilterInfo({
+      newFilterInfo = {
+        ...newFilterInfo,
         list: ethnicity.ethnicityList,
         type: 'radio',
         value: ethnicity.ethnicityList,
-      })
+      }
     } else if (id === 'isDeath') {
-      setFilterInfo({
+      newFilterInfo = {
+        ...newFilterInfo,
         list: ['T', 'F'],
         type: 'radio',
         value: ['true', 'false'],
-      })
+      }
     }
+    setFilterInfo(newFilterInfo)
   }
 
   if (!patient || !patient.patient) return <div>로딩중...</div>

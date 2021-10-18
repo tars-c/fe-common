@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const PatientFilterContainer = ({ list, type, value, onSubmit }) => {
+const PatientFilterContainer = ({ list, type, value, onReset, onSubmit }) => {
   return (
     <form onSubmit={onSubmit}>
       {list.map((item, idx) => (
@@ -15,7 +15,7 @@ const PatientFilterContainer = ({ list, type, value, onSubmit }) => {
           {item}
         </label>
       ))}
-      <button>필터 해제</button>
+      <button onClick={onReset}>필터 해제</button>
       <button type="submit">필터 설정</button>
     </form>
   )
@@ -24,11 +24,13 @@ const PatientFilterContainer = ({ list, type, value, onSubmit }) => {
 PatientFilterContainer.propTypes = {
   list: PropTypes.array,
   type: PropTypes.string,
+  onReset: PropTypes.func,
   onSubmit: PropTypes.func,
 }
 PatientFilterContainer.defaultProps = {
   list: [],
   type: '',
+  onReset: () => {},
   onSubmit: () => {},
 }
 
