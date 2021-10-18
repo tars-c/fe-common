@@ -7,11 +7,11 @@ import { SET_DETAIL } from '@patient/modules/store/detail'
 export function* fetchDetail(action) {
   try {
     const { fetchType, pid } = action
-    const detail = yield call(getData(path[fetchType](pid)))
+    const detail = yield call(getData, path[fetchType](pid))
 
     yield put({ type: SET_DETAIL, detail })
   } catch (e) {
-    console.error(error)
+    console.error(e)
   }
 }
 
