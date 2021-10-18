@@ -4,13 +4,14 @@ import styled from 'styled-components'
 
 import TableFilter from '@common/components/TableFilter'
 import { defaultTableBorderStyle } from '@common/styles/table'
-import { TABLE_HEADER_COLOR } from '@common/styles/variables'
+import { TABLE_HEADER_COLOR, TABLE_ITEM_COLOR } from '@common/styles/variables'
 
 const WrapTable = styled.table`
   width: 100%;
   ${defaultTableBorderStyle}
   border-collapse: collapse;
   text-align: center;
+  cursor: pointer;
 `
 const WrapTableHead = styled.th`
   ${defaultTableBorderStyle};
@@ -19,14 +20,19 @@ const WrapTableHead = styled.th`
   &:hover {
     background-color: ${TABLE_HEADER_COLOR};
     transition: all 0.3s ease-in-out;
-    cursor: pointer;
   }
 `
 const WrapTableRow = styled.tr`
   ${defaultTableBorderStyle}
+
+  &:hover:not(.table_header) {
+    background-color: ${TABLE_ITEM_COLOR};
+    transition: all 0.3s ease-in-out;
+  }
 `
 const WrapTableData = styled.td`
   ${defaultTableBorderStyle}
+  padding: 5px 0;
 `
 
 const Table = ({
@@ -40,7 +46,7 @@ const Table = ({
   return (
     <WrapTable>
       <thead>
-        <WrapTableRow onClick={onHeaderClick}>
+        <WrapTableRow onClick={onHeaderClick} className="table_header">
           {categories.map((category, idx) => (
             <WrapTableHead key={`thead__${idx}`} id={category.tableCol || ''}>
               {category.value}
