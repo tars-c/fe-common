@@ -13,8 +13,8 @@ const WrapTable = styled.table`
   text-align: center;
 `
 const WrapTableHead = styled.th`
-  padding: 10px;
   ${defaultTableBorderStyle};
+  padding: 10px;
 
   &:hover {
     background-color: ${TABLE_HEADER_COLOR};
