@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import TableFilter from '@common/components/TableFilter'
 import { defaultTableBorderStyle } from '@common/styles/table'
+import { TABLE_HEADER_COLOR } from '@common/styles/variables'
 
 const WrapTable = styled.table`
   width: 100%;
@@ -12,7 +13,14 @@ const WrapTable = styled.table`
   text-align: center;
 `
 const WrapTableHead = styled.th`
-  ${defaultTableBorderStyle}
+  padding: 10px;
+  ${defaultTableBorderStyle};
+
+  &:hover {
+    background-color: ${TABLE_HEADER_COLOR};
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
 `
 const WrapTableRow = styled.tr`
   ${defaultTableBorderStyle}

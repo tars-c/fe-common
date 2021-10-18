@@ -1,5 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const WrapFilterForm = styled.form`
+  display: flex;
+  margin: 10px 0 0 0;
+  font-size: 1.2rem;
+  flex-direction: column;
+`
+const WrapFilterInput = styled.input`
+  margin: 5px 5px 5px 0;
+`
+const WrapButton = styled.button`
+  margin: 5px 0 0 0;
+  padding: 5px 20px;
+  background-color: white;
+  border: 1px solid #ff865e;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ff865e;
+    transition: all 0.3s ease-in-out;
+  }
+`
 
 const PatientFilterContainer = ({
   filter,
@@ -11,10 +35,10 @@ const PatientFilterContainer = ({
   onChange,
 }) => {
   return (
-    <form>
+    <WrapFilterForm>
       {list.map((item, idx) => (
-        <label htmlFor={`filter_${idx}`} key={`${id[idx]}Filter__${idx}`}>
-          <input
+        <label htmlFor={id[idx]} key={`${id[idx]}Filter__${idx}`}>
+          <WrapFilterInput
             type={type}
             id={id[idx]}
             defaultValue={value[idx]}
@@ -25,8 +49,8 @@ const PatientFilterContainer = ({
           {item}
         </label>
       ))}
-      <button onClick={onReset}>필터 해제</button>
-    </form>
+      <WrapButton onClick={onReset}>필터 해제</WrapButton>
+    </WrapFilterForm>
   )
 }
 
