@@ -7,7 +7,7 @@ const initialState = {
   patient: {},
   race: {},
   gender: {},
-  ethnicityList: {},
+  ethnicity: {},
   patientBrief: {},
   patientCond: {},
   patientDrug: {},
