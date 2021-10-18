@@ -3,7 +3,7 @@ import produce from 'immer'
 export const SET_FILTER = '@filter/SET_FILTER'
 
 // 필터 설정
-export const setFilter = ({ id, value }) => ({ type: SET_PAGE_NUM, id, value })
+export const setFilter = ({ id, value }) => ({ type: SET_FILTER, id, value })
 
 const initialState = {
   filter: {
