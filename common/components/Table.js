@@ -11,7 +11,6 @@ const WrapTable = styled.table`
   ${defaultTableBorderStyle}
   border-collapse: collapse;
   text-align: center;
-  cursor: pointer;
 `
 const WrapTableHead = styled.th`
   ${defaultTableBorderStyle};
@@ -20,6 +19,7 @@ const WrapTableHead = styled.th`
   &:hover {
     background-color: ${TABLE_HEADER_COLOR};
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
   }
 `
 const WrapTableRow = styled.tr`
@@ -28,6 +28,7 @@ const WrapTableRow = styled.tr`
   &:hover:not(.table_header) {
     background-color: ${TABLE_ITEM_COLOR};
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
   }
 `
 const WrapTableData = styled.td`
@@ -39,9 +40,11 @@ const Table = ({
   categories,
   dataList,
   itemId,
+  detailId,
   onHeaderClick,
   onFilterClick,
   onItemClick,
+  children,
 }) => {
   return (
     <WrapTable>
@@ -61,13 +64,16 @@ const Table = ({
         {dataList &&
           dataList.map((data, dIdx) => {
             return (
-              <WrapTableRow key={`trow__${dIdx}`} id={data[itemId]}>
-                {categories.map((category, cIdx) => (
-                  <WrapTableData key={`tdata__${cIdx}`}>
-                    {data[category.id]}
-                  </WrapTableData>
-                ))}
-              </WrapTableRow>
+              <React.Fragment key={dIdx}>
+                <WrapTableRow key={`trow__${dIdx}`} id={data[itemId]}>
+                  {categories.map((category, cIdx) => (
+                    <WrapTableData key={`tdata__${cIdx}`}>
+                      {data[category.id]}
+                    </WrapTableData>
+                  ))}
+                </WrapTableRow>
+                {itemId && data[itemId] == detailId && children}
+              </React.Fragment>
             )
           })}
       </tbody>

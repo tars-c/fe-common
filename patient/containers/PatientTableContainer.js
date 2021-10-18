@@ -5,6 +5,7 @@ import ListPagination from '@common/components/ListPagination'
 import Pagination from '@common/components/Pagination'
 import Table from '@common/components/Table'
 import makeSeqArray from '@common/helpers/makeSeqArray'
+import PatientDetailContainer from '@patient/containers/PatientDetailContainer'
 import PatinetFilterContainer from '@patient/containers/PatientFilterContainer'
 import filterPatient from '@patient/helpers/filterPatient'
 import {
@@ -39,6 +40,7 @@ const PatientTableContainer = () => {
     onChange: () => {},
   }
   const [filterInfo, setFilterInfo] = useState(initFilterInfo)
+  const [detailId, setDetailId] = useState()
 
   useEffect(() => {
     initFetch()
@@ -291,6 +293,7 @@ const PatientTableContainer = () => {
         fetchType: 'patientBrief',
         pid,
       })
+      setDetailId(pid)
     } catch (error) {
       console.error(error)
     }
@@ -305,10 +308,13 @@ const PatientTableContainer = () => {
         categories={patientCategories}
         dataList={filterPatient(patient.patient.list)}
         itemId="personID"
+        detailId={detailId}
         onHeaderClick={handleTableHeadClick}
         onFilterClick={handleFilterClick}
         onItemClick={handleTableItemClick}
-      />
+      >
+        <PatientDetailContainer detail={detail} />
+      </Table>
       <Pagination
         seqArray={makeSeqArray(range)}
         curr={page}
