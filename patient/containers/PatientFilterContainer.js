@@ -31,14 +31,20 @@ const PatientFilterContainer = ({
 }
 
 PatientFilterContainer.propTypes = {
+  filter: PropTypes.array,
+  id: PropTypes.string,
   list: PropTypes.array,
   type: PropTypes.string,
+  value: PropTypes.array,
   onReset: PropTypes.func,
   onChange: PropTypes.func,
 }
 PatientFilterContainer.defaultProps = {
+  filter: [],
+  id: '',
   list: [],
   type: '',
+  value: [],
   onReset: () => {},
   onChange: () => {},
 }

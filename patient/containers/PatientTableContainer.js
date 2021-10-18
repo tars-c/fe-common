@@ -222,7 +222,7 @@ const PatientTableContainer = () => {
       newFilterInfo = {
         ...newFilterInfo,
         id: 'death',
-        list: ['T', 'F'],
+        list: ['Y', 'N'],
         type: 'radio',
         value: ['true', 'false'],
         onReset: (e) => {
