@@ -184,7 +184,7 @@ const PatientTableContainer = () => {
     if (id === 'gender') {
       newFilterInfo = {
         ...newFilterInfo,
-        id,
+        id: new Array(gender.genderList.length).fill('gender'),
         list: gender.genderList,
         type: 'radio',
         value: gender.genderList,
@@ -192,20 +192,43 @@ const PatientTableContainer = () => {
     } else if (id === 'age') {
       newFilterInfo = {
         ...newFilterInfo,
-        id,
+        id: ['age_min', 'age_max'],
         list: ['minAge', 'maxAge'],
         type: 'number',
         value: [filter.age_min, filter.age_max],
         onReset: (e) => {
           e.preventDefault()
-          dispatch(setFilter(age_min, null))
-          dispatch(setFilter(age_max, null))
+          dispatch(setFilter({ id: 'age_min', value: null }))
+          dispatch(setFilter({ id: 'age_max', value: null }))
+
+          e.target.parentNode.reset()
+
+          newFilter.age_min = null
+          newFilter.age_max = null
+          dispatch({
+            type: 'FETCH_DATA',
+            fetchType: 'patient',
+            params: { page, length, ...newFilter },
+          })
+        },
+        onChange: (e) => {
+          const { id, value } = e.target
+
+          if (parseInt(value) < 0) return
+          dispatch(setFilter({ id, value }))
+
+          newFilter[id] = value
+          dispatch({
+            type: 'FETCH_DATA',
+            fetchType: 'patient',
+            params: { page, length, ...newFilter },
+          })
         },
       }
     } else if (id === 'race') {
       newFilterInfo = {
         ...newFilterInfo,
-        id,
+        id: new Array(race.raceList.length).fill('race'),
         list: race.raceList,
         type: 'radio',
         value: race.raceList,
@@ -213,7 +236,7 @@ const PatientTableContainer = () => {
     } else if (id === 'ethnicity') {
       newFilterInfo = {
         ...newFilterInfo,
-        id,
+        id: new Array(ethnicity.ethnicityList.length).fill('ethnicity'),
         list: ethnicity.ethnicityList,
         type: 'radio',
         value: ethnicity.ethnicityList,
@@ -221,7 +244,7 @@ const PatientTableContainer = () => {
     } else if (id === 'isDeath') {
       newFilterInfo = {
         ...newFilterInfo,
-        id: 'death',
+        id: new Array(2).fill('death'),
         list: ['Y', 'N'],
         type: 'radio',
         value: ['true', 'false'],
@@ -237,9 +260,10 @@ const PatientTableContainer = () => {
           })
         },
         onChange: (e) => {
-          dispatch(setFilter({ id: 'death', value: e.target.value }))
+          const value = e.target.value
+          dispatch(setFilter({ id: 'death', value }))
 
-          newFilter.death = e.target.value
+          newFilter.death = value
           dispatch({
             type: 'FETCH_DATA',
             fetchType: 'patient',

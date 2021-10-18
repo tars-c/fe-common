@@ -13,14 +13,14 @@ const PatientFilterContainer = ({
   return (
     <form>
       {list.map((item, idx) => (
-        <label htmlFor={`filter_${idx}`} key={`${id}Filter__${idx}`}>
+        <label htmlFor={`filter_${idx}`} key={`${id[idx]}Filter__${idx}`}>
           <input
             type={type}
-            id={`filter_${idx}`}
+            id={id[idx]}
             defaultValue={value[idx]}
             name="filter"
             onChange={onChange}
-            checked={value[idx] === filter[id]}
+            checked={value[idx] === filter[id[idx]]}
           />
           {item}
         </label>
@@ -31,8 +31,8 @@ const PatientFilterContainer = ({
 }
 
 PatientFilterContainer.propTypes = {
-  filter: PropTypes.array,
-  id: PropTypes.string,
+  filter: PropTypes.object,
+  id: PropTypes.array,
   list: PropTypes.array,
   type: PropTypes.string,
   value: PropTypes.array,
@@ -40,8 +40,8 @@ PatientFilterContainer.propTypes = {
   onChange: PropTypes.func,
 }
 PatientFilterContainer.defaultProps = {
-  filter: [],
-  id: '',
+  filter: {},
+  id: [],
   list: [],
   type: '',
   value: [],
