@@ -201,7 +201,10 @@ const PatientTableContainer = () => {
           dispatch(setFilter({ id: 'age_min', value: null }))
           dispatch(setFilter({ id: 'age_max', value: null }))
 
-          e.target.parentNode.reset()
+          const form = e.target.parentNode
+          form.reset()
+          form.age_min.value = ''
+          form.age_max.value = ''
 
           newFilter.age_min = null
           newFilter.age_max = null
