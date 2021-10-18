@@ -19,6 +19,7 @@ import { setPage, setPageLength } from '@patient/modules/store/pagination'
 const PatientTableContainer = () => {
   const { patient, race, gender, ethnicity } = useSelector((state) => state.api)
   const { page, length } = useSelector((state) => state.patient.pagination)
+  const { filter } = useSelector((state) => state.patient.filter)
 
   const dispatch = useDispatch()
 
@@ -28,11 +29,12 @@ const PatientTableContainer = () => {
   })
   const [range, setRange] = useState({ start: 1, end: 10 })
   const [filterInfo, setFilterInfo] = useState({
+    id: '',
     list: null,
     type: '',
     value: null,
     onReset: () => {},
-    onSubmit: () => {},
+    onChange: () => {},
   })
 
   useEffect(() => {
@@ -135,6 +137,7 @@ const PatientTableContainer = () => {
 
   // 테이블 필터 클릭 이벤트 핸들러
   const handleFilterClick = (e) => {
+    e.stopPropagation()
     const { id } = e.target.closest('SPAN')
 
     if (!id) return
@@ -143,11 +146,10 @@ const PatientTableContainer = () => {
     let newFilterInfo = {
       onReset: (e) => {
         e.preventDefault()
-        dispatch(setFilter(id, null))
+        dispatch(setFilter({ id, value: null }))
       },
-      onSubmit: (e) => {
-        e.preventDefault()
-        dispatch(setFilter(id, e.target.value))
+      onChange: (e) => {
+        dispatch(setFilter({ id, value: e.target.value }))
       },
     }
 
@@ -155,6 +157,7 @@ const PatientTableContainer = () => {
     if (id === 'gender') {
       newFilterInfo = {
         ...newFilterInfo,
+        id,
         list: gender.genderList,
         type: 'radio',
         value: gender.genderList,
@@ -162,15 +165,11 @@ const PatientTableContainer = () => {
     } else if (id === 'age') {
       newFilterInfo = {
         ...newFilterInfo,
+        id,
         list: ['minAge', 'maxAge'],
         type: 'number',
-        value: [0, 0],
+        value: [filter.age_min, filter.age_max],
         onReset: (e) => {
-          e.preventDefault()
-          dispatch(setFilter(age_min, null))
-          dispatch(setFilter(age_max, null))
-        },
-        onSubmit: (e) => {
           e.preventDefault()
           dispatch(setFilter(age_min, null))
           dispatch(setFilter(age_max, null))
@@ -179,6 +178,7 @@ const PatientTableContainer = () => {
     } else if (id === 'race') {
       newFilterInfo = {
         ...newFilterInfo,
+        id,
         list: race.raceList,
         type: 'radio',
         value: race.raceList,
@@ -186,6 +186,7 @@ const PatientTableContainer = () => {
     } else if (id === 'ethnicity') {
       newFilterInfo = {
         ...newFilterInfo,
+        id,
         list: ethnicity.ethnicityList,
         type: 'radio',
         value: ethnicity.ethnicityList,
@@ -193,9 +194,17 @@ const PatientTableContainer = () => {
     } else if (id === 'isDeath') {
       newFilterInfo = {
         ...newFilterInfo,
+        id: 'death',
         list: ['T', 'F'],
         type: 'radio',
         value: ['true', 'false'],
+        onReset: (e) => {
+          e.preventDefault()
+          dispatch(setFilter({ id: 'death', value: null }))
+        },
+        onChange: (e) => {
+          dispatch(setFilter({ id: 'death', value: e.target.value }))
+        },
       }
     }
     setFilterInfo(newFilterInfo)
@@ -217,7 +226,9 @@ const PatientTableContainer = () => {
         curr={page}
         onClick={handlePaginationClick}
       />
-      {filterInfo.list && <PatinetFilterContainer {...filterInfo} />}
+      {filterInfo.list && (
+        <PatinetFilterContainer filter={filter} {...filterInfo} />
+      )}
     </>
   )
 }
