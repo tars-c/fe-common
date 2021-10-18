@@ -1,39 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import Link from 'next/link'
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: #fff;
-`
+import PatientTableContainer from '@patient/containers/PatientTableContainer'
 
-const Anchor = styled.a`
+const WrapTableLayout = styled.section`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  font-size: 24px;
-  color: #4d5661;
-  cursor: pointer;
-  &:hover {
-    color: white;
-  }
+  margin: 30px 10% 0;
 `
 
 function Home() {
   return (
-    <>
-      <Title>Linewalks</Title>
-      <Link href="/about">
-        <Anchor>
-          About
-          <img
-            src="svg/icn_pathway_arrow_right_24.svg"
-            width="24"
-            height="24"
-            alt="arrow right"
-          />
-        </Anchor>
-      </Link>
-    </>
+    <WrapTableLayout>
+      <PatientTableContainer />
+    </WrapTableLayout>
   )
 }
 
