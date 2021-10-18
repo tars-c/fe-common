@@ -45,7 +45,7 @@ const PatientTableContainer = () => {
     dispatch({
       type: 'FETCH_DATA',
       fetchType: 'patient',
-      params: { page, length },
+      params: { page, length, ...filter },
     })
     initListFetch.forEach((list) => {
       dispatch({ type: 'FETCH_DATA', fetchType: list })
@@ -60,7 +60,7 @@ const PatientTableContainer = () => {
       dispatch({
         type: 'FETCH_DATA',
         fetchType: 'patient',
-        params: { page: 1, length: newLength },
+        params: { page: 1, length: newLength, ...filter },
       })
       dispatch(setPageLength(newLength))
 
@@ -110,7 +110,7 @@ const PatientTableContainer = () => {
       dispatch({
         type: 'FETCH_DATA',
         fetchType: 'patient',
-        params: { page: newPage, length },
+        params: { page: newPage, length, ...filter },
       })
       dispatch(setPage(newPage))
     } catch (e) {
@@ -127,7 +127,13 @@ const PatientTableContainer = () => {
     dispatch({
       type: 'FETCH_DATA',
       fetchType: 'patient',
-      params: { page, length, order_column: id, order_desc: orderDesc.desc },
+      params: {
+        page,
+        length,
+        order_column: id,
+        order_desc: orderDesc.desc,
+        ...filter,
+      },
     })
     setOrderDesc({
       desc: id === orderDesc.befOrderName ? !orderDesc.desc : false,
@@ -142,14 +148,32 @@ const PatientTableContainer = () => {
 
     if (!id) return
 
-    // 필터 이벤트(초기화, 설정)
+    let newFilter = {
+      ...filter,
+    }
+
+    // 필터 이벤트(초기화, 설정) -> 이후 API 데이터 리로드
     let newFilterInfo = {
       onReset: (e) => {
         e.preventDefault()
+
+        newFilter[id] = null
         dispatch(setFilter({ id, value: null }))
+        dispatch({
+          type: 'FETCH_DATA',
+          fetchType: 'patient',
+          params: { page, length, ...newFilter },
+        })
       },
       onChange: (e) => {
         dispatch(setFilter({ id, value: e.target.value }))
+
+        newFilter[id] = e.target.value
+        dispatch({
+          type: 'FETCH_DATA',
+          fetchType: 'patient',
+          params: { page, length, ...newFilter },
+        })
       },
     }
 
@@ -201,9 +225,23 @@ const PatientTableContainer = () => {
         onReset: (e) => {
           e.preventDefault()
           dispatch(setFilter({ id: 'death', value: null }))
+
+          newFilter.death = null
+          dispatch({
+            type: 'FETCH_DATA',
+            fetchType: 'patient',
+            params: { page, length, ...newFilter },
+          })
         },
         onChange: (e) => {
           dispatch(setFilter({ id: 'death', value: e.target.value }))
+
+          newFilter.death = e.target.value
+          dispatch({
+            type: 'FETCH_DATA',
+            fetchType: 'patient',
+            params: { page, length, ...newFilter },
+          })
         },
       }
     }
