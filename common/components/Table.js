@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import TableFilter from '@common/components/TableFilter'
 import { defaultTableBorderStyle } from '@common/styles/table'
 
 const WrapTable = styled.table`
