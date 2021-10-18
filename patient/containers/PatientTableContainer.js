@@ -28,14 +28,16 @@ const PatientTableContainer = () => {
     befOrderName: '',
   })
   const [range, setRange] = useState({ start: 1, end: 10 })
-  const [filterInfo, setFilterInfo] = useState({
+
+  const initFilterInfo = {
     id: '',
     list: null,
     type: '',
     value: null,
     onReset: () => {},
     onChange: () => {},
-  })
+  }
+  const [filterInfo, setFilterInfo] = useState(initFilterInfo)
 
   useEffect(() => {
     initFetch()
@@ -66,6 +68,7 @@ const PatientTableContainer = () => {
 
       dispatch(setPage(1))
       setRange({ start: 1, end: 10 })
+      setFilterInfo(initFilterInfo)
     } catch (e) {
       console.error(e)
     }
