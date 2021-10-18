@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import TableFilter from '@common/components/TableFilter'
 import { defaultTableBorderStyle } from '@common/styles/table'
+import { TABLE_HEADER_COLOR } from '@common/styles/variables'
 
 const WrapTable = styled.table`
   width: 100%;
@@ -11,7 +13,14 @@ const WrapTable = styled.table`
   text-align: center;
 `
 const WrapTableHead = styled.th`
-  ${defaultTableBorderStyle}
+  ${defaultTableBorderStyle};
+  padding: 10px;
+
+  &:hover {
+    background-color: ${TABLE_HEADER_COLOR};
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
 `
 const WrapTableRow = styled.tr`
   ${defaultTableBorderStyle}
@@ -20,14 +29,17 @@ const WrapTableData = styled.td`
   ${defaultTableBorderStyle}
 `
 
-const Table = ({ categories, dataList }) => {
+const Table = ({ categories, dataList, onClick, onFilterClick }) => {
   return (
     <WrapTable>
       <thead>
-        <WrapTableRow>
+        <WrapTableRow onClick={onClick}>
           {categories.map((category, idx) => (
-            <WrapTableHead key={`thead__${idx}`}>
+            <WrapTableHead key={`thead__${idx}`} id={category.tableCol || ''}>
               {category.value}
+              {category.filter && (
+                <TableFilter id={category.id} onClick={onFilterClick} />
+              )}
             </WrapTableHead>
           ))}
         </WrapTableRow>
@@ -53,10 +65,14 @@ const Table = ({ categories, dataList }) => {
 Table.propTypes = {
   categories: PropTypes.array,
   dataList: PropTypes.array,
+  onClick: PropTypes.func,
+  onFilterClick: PropTypes.func,
 }
 Table.defaultProps = {
   categories: [],
   dataList: [],
+  onClick: () => {},
+  onFilterClick: () => {},
 }
 
 export default Table
