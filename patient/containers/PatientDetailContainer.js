@@ -3,16 +3,20 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { BiLinkExternal } from 'react-icons/bi'
 
+import ListTable from '@common/components/ListTable'
+
+const WrapDetailTitle = styled.h2`
+  margin: 15px 0;
+`
 const WrapDetailInfo = styled.tr`
   text-align: center;
 `
-const WrapDetailList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
+const WrapTableContent = styled.div`
+  padding: 0 20px;
 `
 const WrapDetailPageLink = styled.a`
   display: flex;
+  margin: 10px 0;
   justify-content: center;
   align-items: center;
 
@@ -26,10 +30,13 @@ const PatientDetailContainer = ({ detail }) => {
   return (
     <WrapDetailInfo onClick={(e) => e.stopPropagation()}>
       <td colSpan="100%">
-        <h2>
+        <WrapDetailTitle>
           방문 횟수 : <span>{detail.visitCount}</span>
-        </h2>
-        <h2>진단 정보</h2>
+        </WrapDetailTitle>
+        <WrapDetailTitle>진단 정보</WrapDetailTitle>
+        <WrapTableContent>
+          <ListTable col={5} listData={detail.conditionList} />
+        </WrapTableContent>
         <WrapDetailPageLink>
           <BiLinkExternal />
           상세 페이지 바로가기
