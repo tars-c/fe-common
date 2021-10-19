@@ -1,22 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ListTable from '@common/components/ListTable'
+import Table from '@common/components/Table'
+import {
+  pCondCategory,
+  pDrugCategory,
+} from '@patient/consts/patientDetailConst'
 
-const PatientVisitContainer = ({ conditionList, drugList, visitID }) => {
+const PatientVisitContainer = ({ conditionList, drugList }) => {
   return (
     <tr>
       <td colSpan="100%">
         <h2>진단 정보</h2>
-        <ListTable
-          col={5}
-          listData={conditionList.filter((item) => item.visitID === visitID)}
-        />
+        <Table categories={pCondCategory} dataList={conditionList} />
         <h2>의약품 처방</h2>
-        <ListTable
-          col={5}
-          listData={drugList.filter((item) => item.visitID === visitID)}
-        />
+        <Table categories={pDrugCategory} dataList={drugList} />
       </td>
     </tr>
   )
@@ -25,13 +23,11 @@ const PatientVisitContainer = ({ conditionList, drugList, visitID }) => {
 PatientVisitContainer.propTypes = {
   conditionList: PropTypes.array,
   drugList: PropTypes.array,
-  visitID: PropTypes.string,
 }
 
 PatientVisitContainer.defaultProps = {
   conditionList: [],
   drugList: [],
-  visitID: '',
 }
 
 export default PatientVisitContainer

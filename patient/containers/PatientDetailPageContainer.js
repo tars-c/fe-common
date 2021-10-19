@@ -25,15 +25,30 @@ const PatientDetailpageContainer = ({ id }) => {
     }
   }
 
+  const handleItemClick = (e) => {
+    const { id } = e.target.closest('TR')
+    setVisitID(id)
+  }
+
   return (
     <>
       <h1>{id} 환자 방문 기록</h1>
       {patientVisit?.visitList && (
-        <Table categories={pVisitCategory} dataList={patientVisit.visitList}>
+        <Table
+          categories={pVisitCategory}
+          dataList={patientVisit.visitList}
+          itemId="visitID"
+          detailId={visitID}
+          onItemClick={handleItemClick}
+        >
           {visitID && (
             <PatientVisitContainer
-              conditionList={patientCond.conditonList}
-              drugList={patientDrug.drugList}
+              conditionList={patientCond.conditionList.filter(
+                (item) => item.visitID == visitID,
+              )}
+              drugList={patientDrug.drugList.filter(
+                (item) => item.visitID == visitID,
+              )}
               visitID={visitID}
             />
           )}
