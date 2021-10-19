@@ -9,9 +9,15 @@ const initialState = {
   gender: {},
   ethnicity: {},
   patientBrief: {},
-  patientCond: {},
-  patientDrug: {},
-  patientVisit: {},
+  patientCond: {
+    conditionList: [],
+  },
+  patientDrug: {
+    drugList: [],
+  },
+  patientVisit: {
+    visitList: [],
+  },
 }
 
 const api = (state = initialState, action) => {
