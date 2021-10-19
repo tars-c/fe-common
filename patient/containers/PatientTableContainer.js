@@ -27,7 +27,7 @@ const PatientTableContainer = () => {
 
   const [orderDesc, setOrderDesc] = useState({
     desc: false,
-    befOrderName: '',
+    befOrderCol: '',
   })
   const [range, setRange] = useState({ start: 1, end: PAGE_CNT })
 
@@ -54,7 +54,7 @@ const PatientTableContainer = () => {
     dispatch({
       type: 'FETCH_DATA',
       fetchType: 'patient',
-      params: { page, length, ...filter },
+      params: { page, length },
     })
     initListFetch.forEach((list) => {
       dispatch({ type: 'FETCH_DATA', fetchType: list })
@@ -84,7 +84,13 @@ const PatientTableContainer = () => {
       dispatch({
         type: 'FETCH_DATA',
         fetchType: 'patient',
-        params: { page: 1, length: newLength, ...filter },
+        params: {
+          page: 1,
+          length: newLength,
+          order_column: orderDesc.befOrderCol,
+          order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+          ...filter,
+        },
       })
       dispatch(setPageLength(newLength))
 
@@ -141,7 +147,13 @@ const PatientTableContainer = () => {
       dispatch({
         type: 'FETCH_DATA',
         fetchType: 'patient',
-        params: { page: newPage, length, ...filter },
+        params: {
+          page: newPage,
+          length,
+          order_column: orderDesc.befOrderCol,
+          order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+          ...filter,
+        },
       })
       dispatch(setPage(newPage))
     } catch (e) {
@@ -181,8 +193,8 @@ const PatientTableContainer = () => {
       })
     }
     setOrderDesc({
-      desc: id === orderDesc.befOrderName ? !orderDesc.desc : false,
-      befOrderName: id,
+      desc: id === orderDesc.befOrderCol ? !orderDesc.desc : false,
+      befOrderCol: id,
     })
   }
 
@@ -207,7 +219,13 @@ const PatientTableContainer = () => {
         dispatch({
           type: 'FETCH_DATA',
           fetchType: 'patient',
-          params: { page: 1, length, ...newFilter },
+          params: {
+            page: 1,
+            length,
+            order_column: orderDesc.befOrderCol,
+            order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+            ...newFilter,
+          },
         })
         dispatch(setPage(1))
         setRange({ start: 1, end: PAGE_CNT })
@@ -219,7 +237,13 @@ const PatientTableContainer = () => {
         dispatch({
           type: 'FETCH_DATA',
           fetchType: 'patient',
-          params: { page: 1, length, ...newFilter },
+          params: {
+            page: 1,
+            length,
+            order_column: orderDesc.befOrderCol,
+            order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+            ...newFilter,
+          },
         })
         dispatch(setPage(1))
         setRange({ start: 1, end: PAGE_CNT })
@@ -257,7 +281,13 @@ const PatientTableContainer = () => {
           dispatch({
             type: 'FETCH_DATA',
             fetchType: 'patient',
-            params: { page: 1, length, ...newFilter },
+            params: {
+              page: 1,
+              length,
+              order_column: orderDesc.befOrderCol,
+              order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+              ...newFilter,
+            },
           })
           dispatch(setPage(1))
           setRange({ start: 1, end: PAGE_CNT })
@@ -272,7 +302,13 @@ const PatientTableContainer = () => {
           dispatch({
             type: 'FETCH_DATA',
             fetchType: 'patient',
-            params: { page: 1, length, ...newFilter },
+            params: {
+              page: 1,
+              length,
+              order_column: orderDesc.befOrderCol,
+              order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+              ...newFilter,
+            },
           })
           dispatch(setPage(1))
           setRange({ start: 1, end: PAGE_CNT })
@@ -309,7 +345,13 @@ const PatientTableContainer = () => {
           dispatch({
             type: 'FETCH_DATA',
             fetchType: 'patient',
-            params: { page: 1, length, ...newFilter },
+            params: {
+              page: 1,
+              length,
+              order_column: orderDesc.befOrderCol,
+              order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+              ...newFilter,
+            },
           })
           dispatch(setPage(1))
           setRange({ start: 1, end: PAGE_CNT })
@@ -322,7 +364,13 @@ const PatientTableContainer = () => {
           dispatch({
             type: 'FETCH_DATA',
             fetchType: 'patient',
-            params: { page: 1, length, ...newFilter },
+            params: {
+              page: 1,
+              length,
+              order_column: orderDesc.befOrderCol,
+              order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+              ...newFilter,
+            },
           })
           dispatch(setPage(1))
           setRange({ start: 1, end: PAGE_CNT })
