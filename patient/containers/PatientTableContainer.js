@@ -283,8 +283,10 @@ const PatientTableContainer = () => {
 
   // 테이블 아이템 클릭 이벤트 핸들러 - 환자 상세 정보 제공
   const handleTableItemClick = (e) => {
-    const { id: pid } = e.target.closest('TR')
+    const trow = e.target.closest('TR')
+    if (!trow) return
 
+    const { id: pid } = trow
     if (!pid) return
 
     try {
