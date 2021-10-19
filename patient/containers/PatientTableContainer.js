@@ -130,17 +130,31 @@ const PatientTableContainer = () => {
 
     if (!id) return
 
-    dispatch({
-      type: 'FETCH_DATA',
-      fetchType: 'patient',
-      params: {
-        page,
-        length,
-        order_column: id,
-        order_desc: orderDesc.desc,
-        ...filter,
-      },
-    })
+    if (id === 'age') {
+      dispatch({
+        type: 'FETCH_DATA',
+        fetchType: 'patient',
+        params: {
+          page,
+          length,
+          order_column: 'birth',
+          order_desc: orderDesc.desc,
+          ...filter,
+        },
+      })
+    } else {
+      dispatch({
+        type: 'FETCH_DATA',
+        fetchType: 'patient',
+        params: {
+          page,
+          length,
+          order_column: id,
+          order_desc: orderDesc.desc,
+          ...filter,
+        },
+      })
+    }
     setOrderDesc({
       desc: id === orderDesc.befOrderName ? !orderDesc.desc : false,
       befOrderName: id,
