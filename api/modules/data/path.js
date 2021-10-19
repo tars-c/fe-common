@@ -20,7 +20,7 @@ const path = {
   patientBrief: (id) => `/patient/brief/${id}`,
   patientCond: (id) => `/patient/detail/${id}/condition`,
   patientDrug: (id) => `/patient/detail/${id}/drug`,
-  patientVisit: (id) => `/patient/detail/$${id}/visit`,
+  patientVisit: (id) => `/patient/detail/${id}/visit`,
 }
 
 export default path
