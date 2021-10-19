@@ -51,10 +51,12 @@ const PatientDetailContainer = ({ pid, detail }) => {
 }
 
 PatientDetailContainer.propTypes = {
+  pid: PropTypes.string,
   detail: PropTypes.object,
 }
 
 PatientDetailContainer.defaultProps = {
+  pid: '',
   detail: {},
 }
 

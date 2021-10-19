@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Table from '@common/components/Table'
@@ -31,4 +32,12 @@ const PatientDetailpageContainer = ({ id }) => {
     </>
   )
 }
+
+PatientDetailpageContainer.propTypes = {
+  id: PropTypes.string,
+}
+PatientDetailpageContainer.defaultProps = {
+  id: '',
+}
+
 export default PatientDetailpageContainer
