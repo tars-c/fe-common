@@ -295,7 +295,7 @@ const PatientTableContainer = () => {
         fetchType: 'patientBrief',
         pid,
       })
-      setDetailId(pid)
+      setDetailId(pid === detailId ? null : pid)
     } catch (error) {
       console.error(error)
     }

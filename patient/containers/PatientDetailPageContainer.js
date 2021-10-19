@@ -35,7 +35,7 @@ const PatientDetailpageContainer = ({ id }) => {
 
     if (trow) {
       const { id } = e.target.closest('TR')
-      if (id) setVisitID(id)
+      if (id) setVisitID(id === visitID ? null : id)
     }
   }
 
