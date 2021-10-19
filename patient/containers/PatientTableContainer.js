@@ -313,7 +313,7 @@ const PatientTableContainer = () => {
         onFilterClick={handleFilterClick}
         onItemClick={handleTableItemClick}
       >
-        <PatientDetailContainer detail={detail} />
+        <PatientDetailContainer pid={detailId} detail={detail} />
       </Table>
       <Pagination
         seqArray={makeSeqArray(range)}
