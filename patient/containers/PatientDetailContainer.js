@@ -1,11 +1,12 @@
 import React from 'react'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Link from 'next/link'
 
 import { BiLinkExternal } from 'react-icons/bi'
 
 import ListTable from '@common/components/ListTable'
+import { LINK_HOVER_COLOR } from '@common/styles/variables'
 
 const WrapDetailTitle = styled.h2`
   margin: 15px 0;
@@ -23,7 +24,7 @@ const WrapDetailPageLink = styled.a`
   margin: 10px 0;
 
   &:hover {
-    color: #3388aa;
+    color: ${LINK_HOVER_COLOR};
     cursor: pointer;
   }
 `

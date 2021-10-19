@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Table from '@common/components/Table'
 import PatientVisitContainer from '@patient/containers/PatientVisitContainer'
 import { pVisitCategory } from '@patient/consts/patientDetailConst'
+
+const WrapPageTitle = styled.h1`
+  font-size: 2rem;
+`
 
 const PatientDetailpageContainer = ({ id }) => {
   const { patientCond, patientDrug, patientVisit } = useSelector(
@@ -27,12 +32,12 @@ const PatientDetailpageContainer = ({ id }) => {
 
   const handleItemClick = (e) => {
     const { id } = e.target.closest('TR')
-    setVisitID(id)
+    if (id) setVisitID(id)
   }
 
   return (
     <>
-      <h1>{id} 환자 방문 기록</h1>
+      <WrapPageTitle>{id} 환자 방문 기록</WrapPageTitle>
       {patientVisit?.visitList && (
         <Table
           categories={pVisitCategory}

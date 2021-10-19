@@ -1,21 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import styled from 'styled-components'
 import Table from '@common/components/Table'
 import {
   pCondCategory,
   pDrugCategory,
 } from '@patient/consts/patientDetailConst'
 
+const WrapTitle = styled.h2`
+  margin: 15px 0;
+`
+const WrapVisitContent = styled.td`
+  padding: 0 20px 20px;
+`
+
 const PatientVisitContainer = ({ conditionList, drugList }) => {
   return (
     <tr>
-      <td colSpan="100%">
-        <h2>진단 정보</h2>
+      <WrapVisitContent colSpan="100%">
+        <WrapTitle>진단 정보</WrapTitle>
         <Table categories={pCondCategory} dataList={conditionList} />
-        <h2>의약품 처방</h2>
+        <WrapTitle>의약품 처방</WrapTitle>
         <Table categories={pDrugCategory} dataList={drugList} />
-      </td>
+      </WrapVisitContent>
     </tr>
   )
 }
