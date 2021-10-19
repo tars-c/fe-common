@@ -72,7 +72,11 @@ const Table = ({
                     </WrapTableData>
                   ))}
                 </WrapTableRow>
-                {itemId && data[itemId] == detailId && children}
+                {itemId && data[itemId] == detailId && children ? (
+                  children
+                ) : (
+                  <WrapTableRow />
+                )}
               </React.Fragment>
             )
           })}
