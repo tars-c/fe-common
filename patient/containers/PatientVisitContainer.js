@@ -19,9 +19,18 @@ const PatientVisitContainer = ({ conditionList, drugList }) => {
     <tr>
       <WrapVisitContent colSpan="100%">
         <WrapTitle>진단 정보</WrapTitle>
-        <Table categories={pCondCategory} dataList={conditionList} />
+        {conditionList.length > 0 ? (
+          <Table categories={pCondCategory} dataList={conditionList} />
+        ) : (
+          '없음'
+        )}
+
         <WrapTitle>의약품 처방</WrapTitle>
-        <Table categories={pDrugCategory} dataList={drugList} />
+        {drugList.length > 0 ? (
+          <Table categories={pDrugCategory} dataList={drugList} />
+        ) : (
+          '없음'
+        )}
       </WrapVisitContent>
     </tr>
   )
