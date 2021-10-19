@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -22,11 +22,17 @@ const WrapListTableData = styled.td`
 `
 
 const ListTable = ({ col, listData }) => {
-  let splitLists = []
+  const [splitLists, setSplitLists] = useState([])
 
-  while (listData.length > 0) {
-    splitLists.push(listData.splice(0, Math.min(listData.length, col)))
-  }
+  useEffect(() => {
+    let copyListData = [...listData]
+    let sLists = []
+
+    while (copyListData.length > 0) {
+      sLists.push(copyListData.splice(0, Math.min(copyListData.length, col)))
+    }
+    setSplitLists(sLists)
+  }, [listData])
 
   return (
     <WrapListTable>
