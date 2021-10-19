@@ -31,8 +31,12 @@ const PatientDetailpageContainer = ({ id }) => {
   }
 
   const handleItemClick = (e) => {
-    const { id } = e.target.closest('TR')
-    if (id) setVisitID(id)
+    const trow = e.target.closest('TR')
+
+    if (trow) {
+      const { id } = e.target.closest('TR')
+      if (id) setVisitID(id)
+    }
   }
 
   return (
