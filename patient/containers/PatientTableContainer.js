@@ -18,11 +18,11 @@ import { setFilter } from '@patient/modules/store/filter'
 import { setPage, setPageLength } from '@patient/modules/store/pagination'
 
 const PatientTableContainer = () => {
-  const { patient, race, gender, ethnicity } = useSelector((state) => state.api)
+  const { patient, race, gender, ethnicity, patientBrief } = useSelector(
+    (state) => state.api,
+  )
   const { page, length } = useSelector((state) => state.patient.pagination)
   const { filter } = useSelector((state) => state.patient.filter)
-  const { detail } = useSelector((state) => state.patient.detail)
-
   const dispatch = useDispatch()
 
   const [orderDesc, setOrderDesc] = useState({
@@ -286,16 +286,15 @@ const PatientTableContainer = () => {
     const trow = e.target.closest('TR')
     if (!trow) return
 
-    const { id: pid } = trow
-    if (!pid) return
+    const { id } = trow
 
     try {
       dispatch({
-        type: 'FETCH_DETAIL',
+        type: 'FETCH_DATA',
         fetchType: 'patientBrief',
-        pid,
+        id,
       })
-      setDetailId(pid === detailId ? null : pid)
+      setDetailId(id === detailId ? null : id)
     } catch (error) {
       console.error(error)
     }
@@ -315,7 +314,7 @@ const PatientTableContainer = () => {
         onFilterClick={handleFilterClick}
         onItemClick={handleTableItemClick}
       >
-        <PatientDetailContainer pid={detailId} detail={detail} />
+        <PatientDetailContainer pid={detailId} detail={patientBrief} />
       </Table>
       <Pagination
         seqArray={makeSeqArray(range)}
