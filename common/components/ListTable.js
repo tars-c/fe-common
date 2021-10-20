@@ -17,7 +17,7 @@ const WrapListTableRow = styled.tr`
 
 const WrapListTableData = styled.td`
   ${defaultTableBorderStyle}
-  width: ${({ col }) => `${100 / col}%`};
+  width: ${({ col }) => css`calc(100% / ${col})`};
   padding: 5px 3px;
 `
 
