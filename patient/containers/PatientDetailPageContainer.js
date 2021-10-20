@@ -34,7 +34,7 @@ const PatientDetailpageContainer = ({ id }) => {
     const trow = e.target.closest('TR')
 
     if (trow) {
-      const { id } = e.target.closest('TR')
+      const { id } = trow
       if (id) setVisitID(id === visitID ? null : id)
     }
   }
