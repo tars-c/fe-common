@@ -1,10 +1,9 @@
 import React from 'react'
-
+import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 
 import createSagaMiddleware from '@redux-saga/core'
 import rootReducer, { rootSaga } from '@modules/index'
-import { Provider } from 'react-redux'
 
 // saga 미들웨어 연결
 const sagaMiddleware = createSagaMiddleware()

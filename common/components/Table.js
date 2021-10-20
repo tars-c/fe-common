@@ -7,13 +7,14 @@ import { defaultTableBorderStyle } from '@common/styles/table'
 import { TABLE_HEADER_COLOR, TABLE_ITEM_COLOR } from '@common/styles/variables'
 
 const WrapTable = styled.table`
-  width: 100%;
   ${defaultTableBorderStyle}
+  width: 100%;
   border-collapse: collapse;
   text-align: center;
 `
 const WrapTableHead = styled.th`
   ${defaultTableBorderStyle};
+  width: 200px;
   padding: 10px;
 
   &:hover {
@@ -33,7 +34,8 @@ const WrapTableRow = styled.tr`
 `
 const WrapTableData = styled.td`
   ${defaultTableBorderStyle}
-  padding: 5px 0;
+  width: 200px;
+  padding: 5px 3px;
 `
 
 const Table = ({
@@ -72,7 +74,11 @@ const Table = ({
                     </WrapTableData>
                   ))}
                 </WrapTableRow>
-                {itemId && data[itemId] == detailId && children}
+                {itemId && data[itemId] == detailId && children ? (
+                  children
+                ) : (
+                  <WrapTableRow />
+                )}
               </React.Fragment>
             )
           })}

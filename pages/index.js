@@ -8,7 +8,7 @@ const WrapTableLayout = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 30px 10% 0;
+  padding: 30px 15% 0;
 `
 
 function Home() {

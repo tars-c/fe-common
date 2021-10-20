@@ -18,18 +18,18 @@ import { setFilter } from '@patient/modules/store/filter'
 import { setPage, setPageLength } from '@patient/modules/store/pagination'
 
 const PatientTableContainer = () => {
-  const { patient, race, gender, ethnicity } = useSelector((state) => state.api)
+  const { patient, race, gender, ethnicity, patientBrief } = useSelector(
+    (state) => state.api,
+  )
   const { page, length } = useSelector((state) => state.patient.pagination)
   const { filter } = useSelector((state) => state.patient.filter)
-  const { detail } = useSelector((state) => state.patient.detail)
-
   const dispatch = useDispatch()
 
   const [orderDesc, setOrderDesc] = useState({
     desc: false,
-    befOrderName: '',
+    befOrderCol: '',
   })
-  const [range, setRange] = useState({ start: 1, end: 10 })
+  const [range, setRange] = useState({ start: 1, end: PAGE_CNT })
 
   const initFilterInfo = {
     id: '',
@@ -46,14 +46,33 @@ const PatientTableContainer = () => {
     initFetch()
   }, [])
 
+  useEffect(() => {
+    setPageRange()
+  }, [patient])
+
   const initFetch = () => {
     dispatch({
       type: 'FETCH_DATA',
       fetchType: 'patient',
-      params: { page, length, ...filter },
+      params: { page, length },
     })
     initListFetch.forEach((list) => {
       dispatch({ type: 'FETCH_DATA', fetchType: list })
+    })
+  }
+
+  const setPageRange = () => {
+    if (!patient || !patient.patient) return
+    const { totalLength } = patient.patient
+
+    const limitPage = Math.ceil(totalLength / length)
+
+    setRange({
+      start: range.start,
+      end:
+        limitPage > range.start + PAGE_CNT - 1
+          ? range.start + PAGE_CNT - 1
+          : limitPage,
     })
   }
 
@@ -65,12 +84,18 @@ const PatientTableContainer = () => {
       dispatch({
         type: 'FETCH_DATA',
         fetchType: 'patient',
-        params: { page: 1, length: newLength, ...filter },
+        params: {
+          page: 1,
+          length: newLength,
+          order_column: orderDesc.befOrderCol,
+          order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+          ...filter,
+        },
       })
       dispatch(setPageLength(newLength))
 
       dispatch(setPage(1))
-      setRange({ start: 1, end: 10 })
+      setRange({ start: 1, end: PAGE_CNT })
       setFilterInfo(initFilterInfo)
     } catch (e) {
       console.error(e)
@@ -80,7 +105,7 @@ const PatientTableContainer = () => {
   // 페이지네이션 클릭 이벤트 핸들러
   const handlePaginationClick = (e) => {
     const { name, id } = e.target
-    const { totalLength } = patient
+    const { totalLength } = patient.patient
 
     if (!name) return
 
@@ -89,23 +114,29 @@ const PatientTableContainer = () => {
 
     if (name === 'prev') {
       // 앞 단계 페이지
-      newPage = page - PAGE_CNT
+      newPage = parseInt((page - PAGE_CNT - 1) / PAGE_CNT) * PAGE_CNT + 1
 
       if (newPage <= 0) return
 
       setRange({
-        start: parseInt((newPage - 1) / PAGE_CNT) * PAGE_CNT + 1,
-        end: parseInt((newPage - 1) / PAGE_CNT) * PAGE_CNT + PAGE_CNT,
+        start: newPage,
+        end:
+          limitPage > newPage + PAGE_CNT - 1
+            ? newPage + PAGE_CNT - 1
+            : limitPage,
       })
     } else if (name === 'next') {
       // 뒤 단계 페이지
-      newPage = page + PAGE_CNT
+      newPage = parseInt((page + PAGE_CNT) / PAGE_CNT) * PAGE_CNT + 1
 
       if (newPage > limitPage) return
 
       setRange({
-        start: parseInt((newPage - 1) / PAGE_CNT) * PAGE_CNT + 1,
-        end: parseInt((newPage - 1) / PAGE_CNT) * PAGE_CNT + PAGE_CNT,
+        start: newPage,
+        end:
+          limitPage > newPage + PAGE_CNT - 1
+            ? newPage + PAGE_CNT - 1
+            : limitPage,
       })
     } else if (name === 'num') {
       // 번호 페이지
@@ -116,7 +147,13 @@ const PatientTableContainer = () => {
       dispatch({
         type: 'FETCH_DATA',
         fetchType: 'patient',
-        params: { page: newPage, length, ...filter },
+        params: {
+          page: newPage,
+          length,
+          order_column: orderDesc.befOrderCol,
+          order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+          ...filter,
+        },
       })
       dispatch(setPage(newPage))
     } catch (e) {
@@ -127,8 +164,21 @@ const PatientTableContainer = () => {
   // 테이블 헤더 클릭 이벤트 핸들러 - 테이블 컬럼 정렬
   const handleTableHeadClick = (e) => {
     const { id } = e.target
-
     if (!id) return
+
+    let newOrderDesc
+
+    if (id === 'age') {
+      newOrderDesc = {
+        desc: orderDesc.befOrderCol === 'birth' ? !orderDesc.desc : true,
+        befOrderCol: 'birth',
+      }
+    } else {
+      newOrderDesc = {
+        desc: id === orderDesc.befOrderCol ? !orderDesc.desc : true,
+        befOrderCol: id,
+      }
+    }
 
     dispatch({
       type: 'FETCH_DATA',
@@ -136,15 +186,13 @@ const PatientTableContainer = () => {
       params: {
         page,
         length,
-        order_column: id,
-        order_desc: orderDesc.desc,
+        order_column: newOrderDesc.befOrderCol,
+        order_desc: newOrderDesc.desc,
         ...filter,
       },
     })
-    setOrderDesc({
-      desc: id === orderDesc.befOrderName ? !orderDesc.desc : false,
-      befOrderName: id,
-    })
+
+    setOrderDesc(newOrderDesc)
   }
 
   // 테이블 필터 클릭 이벤트 핸들러
@@ -168,8 +216,16 @@ const PatientTableContainer = () => {
         dispatch({
           type: 'FETCH_DATA',
           fetchType: 'patient',
-          params: { page, length, ...newFilter },
+          params: {
+            page: 1,
+            length,
+            order_column: orderDesc.befOrderCol,
+            order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+            ...newFilter,
+          },
         })
+        dispatch(setPage(1))
+        setRange({ start: 1, end: PAGE_CNT })
       },
       onChange: (e) => {
         dispatch(setFilter({ id, value: e.target.value }))
@@ -178,8 +234,16 @@ const PatientTableContainer = () => {
         dispatch({
           type: 'FETCH_DATA',
           fetchType: 'patient',
-          params: { page, length, ...newFilter },
+          params: {
+            page: 1,
+            length,
+            order_column: orderDesc.befOrderCol,
+            order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+            ...newFilter,
+          },
         })
+        dispatch(setPage(1))
+        setRange({ start: 1, end: PAGE_CNT })
       },
     }
 
@@ -214,8 +278,16 @@ const PatientTableContainer = () => {
           dispatch({
             type: 'FETCH_DATA',
             fetchType: 'patient',
-            params: { page, length, ...newFilter },
+            params: {
+              page: 1,
+              length,
+              order_column: orderDesc.befOrderCol,
+              order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+              ...newFilter,
+            },
           })
+          dispatch(setPage(1))
+          setRange({ start: 1, end: PAGE_CNT })
         },
         onChange: (e) => {
           const { id, value } = e.target
@@ -227,8 +299,16 @@ const PatientTableContainer = () => {
           dispatch({
             type: 'FETCH_DATA',
             fetchType: 'patient',
-            params: { page, length, ...newFilter },
+            params: {
+              page: 1,
+              length,
+              order_column: orderDesc.befOrderCol,
+              order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+              ...newFilter,
+            },
           })
+          dispatch(setPage(1))
+          setRange({ start: 1, end: PAGE_CNT })
         },
       }
     } else if (id === 'race') {
@@ -262,8 +342,16 @@ const PatientTableContainer = () => {
           dispatch({
             type: 'FETCH_DATA',
             fetchType: 'patient',
-            params: { page, length, ...newFilter },
+            params: {
+              page: 1,
+              length,
+              order_column: orderDesc.befOrderCol,
+              order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+              ...newFilter,
+            },
           })
+          dispatch(setPage(1))
+          setRange({ start: 1, end: PAGE_CNT })
         },
         onChange: (e) => {
           const value = e.target.value
@@ -273,8 +361,16 @@ const PatientTableContainer = () => {
           dispatch({
             type: 'FETCH_DATA',
             fetchType: 'patient',
-            params: { page, length, ...newFilter },
+            params: {
+              page: 1,
+              length,
+              order_column: orderDesc.befOrderCol,
+              order_desc: orderDesc.befOrderCol !== '' ? orderDesc.desc : null,
+              ...newFilter,
+            },
           })
+          dispatch(setPage(1))
+          setRange({ start: 1, end: PAGE_CNT })
         },
       }
     }
@@ -283,17 +379,18 @@ const PatientTableContainer = () => {
 
   // 테이블 아이템 클릭 이벤트 핸들러 - 환자 상세 정보 제공
   const handleTableItemClick = (e) => {
-    const { id: pid } = e.target.closest('TR')
+    const trow = e.target.closest('TR')
+    if (!trow) return
 
-    if (!pid) return
+    const { id } = trow
 
     try {
       dispatch({
-        type: 'FETCH_DETAIL',
+        type: 'FETCH_DATA',
         fetchType: 'patientBrief',
-        pid,
+        id,
       })
-      setDetailId(pid)
+      setDetailId(id === detailId ? null : id)
     } catch (error) {
       console.error(error)
     }
@@ -313,7 +410,7 @@ const PatientTableContainer = () => {
         onFilterClick={handleFilterClick}
         onItemClick={handleTableItemClick}
       >
-        <PatientDetailContainer detail={detail} />
+        <PatientDetailContainer pid={detailId} detail={patientBrief} />
       </Table>
       <Pagination
         seqArray={makeSeqArray(range)}

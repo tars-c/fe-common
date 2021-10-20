@@ -5,7 +5,7 @@ const path = {
     if (query) {
       let queryStr = []
       for (const [key, value] of Object.entries(query)) {
-        if (!value) continue
+        if (value == null || value == undefined || value === '') continue
         queryStr.push(`${key}=${value}`)
       }
 
@@ -20,7 +20,7 @@ const path = {
   patientBrief: (id) => `/patient/brief/${id}`,
   patientCond: (id) => `/patient/detail/${id}/condition`,
   patientDrug: (id) => `/patient/detail/${id}/drug`,
-  patientVisit: (id) => `/patient/detail/$${id}/visit`,
+  patientVisit: (id) => `/patient/detail/${id}/visit`,
 }
 
 export default path
