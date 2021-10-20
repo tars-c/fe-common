@@ -5,6 +5,7 @@ import ListPagination from '@common/components/ListPagination'
 import Pagination from '@common/components/Pagination'
 import Table from '@common/components/Table'
 import makeSeqArray from '@common/helpers/makeSeqArray'
+import PatientDetailContainer from '@patient/containers/PatientDetailContainer'
 import PatinetFilterContainer from '@patient/containers/PatientFilterContainer'
 import filterPatient from '@patient/helpers/filterPatient'
 import {
@@ -20,6 +21,7 @@ const PatientTableContainer = () => {
   const { patient, race, gender, ethnicity } = useSelector((state) => state.api)
   const { page, length } = useSelector((state) => state.patient.pagination)
   const { filter } = useSelector((state) => state.patient.filter)
+  const { detail } = useSelector((state) => state.patient.detail)
 
   const dispatch = useDispatch()
 
@@ -38,6 +40,7 @@ const PatientTableContainer = () => {
     onChange: () => {},
   }
   const [filterInfo, setFilterInfo] = useState(initFilterInfo)
+  const [detailId, setDetailId] = useState()
 
   useEffect(() => {
     initFetch()
@@ -278,6 +281,24 @@ const PatientTableContainer = () => {
     setFilterInfo(newFilterInfo)
   }
 
+  // 테이블 아이템 클릭 이벤트 핸들러 - 환자 상세 정보 제공
+  const handleTableItemClick = (e) => {
+    const { id: pid } = e.target.closest('TR')
+
+    if (!pid) return
+
+    try {
+      dispatch({
+        type: 'FETCH_DETAIL',
+        fetchType: 'patientBrief',
+        pid,
+      })
+      setDetailId(pid)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   if (!patient || !patient.patient) return <div>로딩중...</div>
 
   return (
@@ -286,9 +307,14 @@ const PatientTableContainer = () => {
       <Table
         categories={patientCategories}
         dataList={filterPatient(patient.patient.list)}
-        onClick={handleTableHeadClick}
+        itemId="personID"
+        detailId={detailId}
+        onHeaderClick={handleTableHeadClick}
         onFilterClick={handleFilterClick}
-      />
+        onItemClick={handleTableItemClick}
+      >
+        <PatientDetailContainer detail={detail} />
+      </Table>
       <Pagination
         seqArray={makeSeqArray(range)}
         curr={page}

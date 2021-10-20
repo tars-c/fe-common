@@ -4,9 +4,9 @@ import styled from 'styled-components'
 
 const WrapFilterForm = styled.form`
   display: flex;
+  flex-direction: column;
   margin: 10px 0 0 0;
   font-size: 1.2rem;
-  flex-direction: column;
 `
 const WrapFilterInput = styled.input`
   margin: 5px 5px 5px 0;
