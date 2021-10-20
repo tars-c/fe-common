@@ -2,7 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"]
+      "@api/*": ["api/*"],
+      "@common/*": ["common/*"],
+      "@modules/*": ["modules/*"],
+      "@patient/*": ["patient/*"]
     }
   }
 }
