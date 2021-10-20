@@ -5,7 +5,7 @@ const path = {
     if (query) {
       let queryStr = []
       for (const [key, value] of Object.entries(query)) {
-        if (!value) continue
+        if (value == null || value == undefined || value === '') continue
         queryStr.push(`${key}=${value}`)
       }
 

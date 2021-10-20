@@ -164,38 +164,35 @@ const PatientTableContainer = () => {
   // 테이블 헤더 클릭 이벤트 핸들러 - 테이블 컬럼 정렬
   const handleTableHeadClick = (e) => {
     const { id } = e.target
-
     if (!id) return
 
+    let newOrderDesc
+
     if (id === 'age') {
-      dispatch({
-        type: 'FETCH_DATA',
-        fetchType: 'patient',
-        params: {
-          page,
-          length,
-          order_column: 'birth',
-          order_desc: orderDesc.desc,
-          ...filter,
-        },
-      })
+      newOrderDesc = {
+        desc: orderDesc.befOrderCol === 'birth' ? !orderDesc.desc : true,
+        befOrderCol: 'birth',
+      }
     } else {
-      dispatch({
-        type: 'FETCH_DATA',
-        fetchType: 'patient',
-        params: {
-          page,
-          length,
-          order_column: id,
-          order_desc: orderDesc.desc,
-          ...filter,
-        },
-      })
+      newOrderDesc = {
+        desc: id === orderDesc.befOrderCol ? !orderDesc.desc : true,
+        befOrderCol: id,
+      }
     }
-    setOrderDesc({
-      desc: id === orderDesc.befOrderCol ? !orderDesc.desc : false,
-      befOrderCol: id,
+
+    dispatch({
+      type: 'FETCH_DATA',
+      fetchType: 'patient',
+      params: {
+        page,
+        length,
+        order_column: newOrderDesc.befOrderCol,
+        order_desc: newOrderDesc.desc,
+        ...filter,
+      },
     })
+
+    setOrderDesc(newOrderDesc)
   }
 
   // 테이블 필터 클릭 이벤트 핸들러
