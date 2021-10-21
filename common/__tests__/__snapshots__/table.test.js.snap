@@ -1,0 +1,480 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`테이블 컴포넌트 테스트 데이터에 대한 렌더링 테스트 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <table
+        class="Table__WrapTable-sc-1d4j3h2-0 kLTMrp"
+      >
+        <thead>
+          <tr
+            class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL table_header"
+          >
+            <th
+              class="Table__WrapTableHead-sc-1d4j3h2-1 iZPEAN"
+              id="id"
+            >
+              환자 ID
+              <span
+                class="TableFilter__WrapFilter-sc-1wuu3q5-0 djBmhD"
+                id="id"
+                name="filter"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th
+              class="Table__WrapTableHead-sc-1d4j3h2-1 iZPEAN"
+              id="age"
+            >
+              나이
+              <span
+                class="TableFilter__WrapFilter-sc-1wuu3q5-0 djBmhD"
+                id="age"
+                name="filter"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th
+              class="Table__WrapTableHead-sc-1d4j3h2-1 iZPEAN"
+              id="gender"
+            >
+              성별
+              <span
+                class="TableFilter__WrapFilter-sc-1wuu3q5-0 djBmhD"
+                id="gender"
+                name="filter"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th
+              class="Table__WrapTableHead-sc-1d4j3h2-1 iZPEAN"
+              id="isDeath"
+            >
+              사망여부
+              <span
+                class="TableFilter__WrapFilter-sc-1wuu3q5-0 djBmhD"
+                id="isDeath"
+                name="filter"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+                  />
+                </svg>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL"
+          >
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              1
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              10
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              F
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              N
+            </td>
+          </tr>
+          <tr
+            class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL"
+          >
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              2
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              20
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              M
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              N
+            </td>
+          </tr>
+          <tr
+            class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL"
+          >
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              3
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              30
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              F
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              Y
+            </td>
+          </tr>
+          <tr
+            class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL"
+          >
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              4
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              40
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              M
+            </td>
+            <td
+              class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+            >
+              N
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>,
+  "container": <div>
+    <table
+      class="Table__WrapTable-sc-1d4j3h2-0 kLTMrp"
+    >
+      <thead>
+        <tr
+          class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL table_header"
+        >
+          <th
+            class="Table__WrapTableHead-sc-1d4j3h2-1 iZPEAN"
+            id="id"
+          >
+            환자 ID
+            <span
+              class="TableFilter__WrapFilter-sc-1wuu3q5-0 djBmhD"
+              id="id"
+              name="filter"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="Table__WrapTableHead-sc-1d4j3h2-1 iZPEAN"
+            id="age"
+          >
+            나이
+            <span
+              class="TableFilter__WrapFilter-sc-1wuu3q5-0 djBmhD"
+              id="age"
+              name="filter"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="Table__WrapTableHead-sc-1d4j3h2-1 iZPEAN"
+            id="gender"
+          >
+            성별
+            <span
+              class="TableFilter__WrapFilter-sc-1wuu3q5-0 djBmhD"
+              id="gender"
+              name="filter"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="Table__WrapTableHead-sc-1d4j3h2-1 iZPEAN"
+            id="isDeath"
+          >
+            사망여부
+            <span
+              class="TableFilter__WrapFilter-sc-1wuu3q5-0 djBmhD"
+              id="isDeath"
+              name="filter"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+                />
+              </svg>
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL"
+        >
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            1
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            10
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            F
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            N
+          </td>
+        </tr>
+        <tr
+          class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL"
+        >
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            2
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            20
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            M
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            N
+          </td>
+        </tr>
+        <tr
+          class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL"
+        >
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            3
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            30
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            F
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            Y
+          </td>
+        </tr>
+        <tr
+          class="Table__WrapTableRow-sc-1d4j3h2-2 OdPbL"
+        >
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            4
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            40
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            M
+          </td>
+          <td
+            class="Table__WrapTableData-sc-1d4j3h2-3 jYWRbB"
+          >
+            N
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
