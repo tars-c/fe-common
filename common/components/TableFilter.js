@@ -17,7 +17,7 @@ const WrapFilter = styled.span`
 
 const TableFilter = ({ id, onClick }) => {
   return (
-    <WrapFilter id={id} onClick={onClick}>
+    <WrapFilter id={id} onClick={onClick} name="filter">
       <FaFilter />
     </WrapFilter>
   )
