@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`환자 테이블의 <ListPagination /> 스냅샷 테스트 1`] = `
+<ListPagination__WrapListPagination
+  onChange={[Function]}
+>
+  <option
+    key="listPagination__0"
+    value={10}
+  >
+    10개씩 출력
+  </option>
+  <option
+    key="listPagination__1"
+    value={20}
+  >
+    20개씩 출력
+  </option>
+  <option
+    key="listPagination__2"
+    value={30}
+  >
+    30개씩 출력
+  </option>
+</ListPagination__WrapListPagination>
+`;

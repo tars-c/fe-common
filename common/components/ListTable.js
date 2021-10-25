@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
@@ -22,23 +22,21 @@ const WrapListTableData = styled.td`
 `
 
 const ListTable = ({ col, listData }) => {
-  const [splitLists, setSplitLists] = useState([])
-
-  useEffect(() => {
+  const splitListData = useCallback(() => {
     let copyListData = [...listData]
     let sLists = []
 
     while (copyListData.length > 0) {
       sLists.push(copyListData.splice(0, Math.min(copyListData.length, col)))
     }
-    setSplitLists(sLists)
-  }, [listData])
+    return sLists
+  }, [col, listData])
 
   return (
     <WrapListTable>
       <thead />
       <tbody>
-        {splitLists.map((list, sIdx) => (
+        {splitListData().map((list, sIdx) => (
           <WrapListTableRow key={`list__${sIdx}`}>
             {list.map((data, dIdx) => (
               <WrapListTableData key={`listItem__${dIdx}`} col={col}>

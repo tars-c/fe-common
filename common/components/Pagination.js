@@ -52,5 +52,7 @@ Pagination.defaultProps = {
   curr: 1,
   onClick: () => {},
 }
+WrapPagination.displayName = 'div'
+WrapPaginationBtn.displayName = 'a'
 
 export default Pagination
