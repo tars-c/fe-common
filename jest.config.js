@@ -1,12 +1,12 @@
 module.exports = {
-  collectCoverageFrom: [
-    '**/*.{js,jsx}',
-    '!**/node_modules/**',
-  ],
+  collectCoverageFrom: ['**/*.{js,jsx}', '!**/node_modules/**'],
   setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
   watchPathIgnorePatterns: ['/node_modules/', '/.next/'],
+  snapshotSerializers: ['enzyme-to-json/serializer'],
   moduleNameMapper: {
-    "^@components(.*)$": "<rootDir>/components/$1",
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^@api(.*)$': '<rootDir>/api$1',
+    '^@common(.*)$': '<rootDir>/common$1',
+    '^@modules(.*)$': '<rootDir>/modules$1',
+    '^@patient(.*)$': '<rootDir>/patient$1',
   },
 }
